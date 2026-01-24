@@ -1,11 +1,252 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const siteTitle = "Matt Kindle";
+const tagline = "Singer · Songwriter";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{siteTitle}</title>
+    <meta name="description" content="Official website of singer-songwriter Matt Kindle" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0f0f0f;
+        --bg-soft: #161616;
+        --text: #f3f3f3;
+        --muted: #b5b5b5;
+        --gold: #c9a24d;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 6rem;
+      }
+
+      section {
+        margin-top: 6rem;
+      }
+
+      h1,
+      h2 {
+        font-family: "Playfair Display", serif;
+        letter-spacing: 0.02em;
+      }
+
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: var(--gold);
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 7vw, 6rem);
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--muted);
+        max-width: 420px;
+      }
+
+      /* NAV */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 15, 15, 0.85);
+        backdrop-filter: blur(6px);
+        z-index: 10;
+      }
+
+      .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav a {
+        font-size: 0.9rem;
+        margin-left: 1.5rem;
+        color: var(--muted);
+      }
+
+      .nav a:hover {
+        color: var(--gold);
+      }
+
+      /* MUSIC */
+      .music iframe {
+        border-radius: 12px;
+        margin-top: 1rem;
+      }
+
+      /* SHOWS */
+      .shows {
+        background: var(--bg-soft);
+        padding: 3rem 2rem;
+        border-radius: 20px;
+      }
+
+      /* ABOUT */
+      .about {
+        max-width: 640px;
+      }
+
+      .about p {
+        margin-bottom: 1rem;
+        color: var(--muted);
+      }
+
+      /* CONTACT */
+      .contact a {
+        display: inline-block;
+        margin-right: 1.5rem;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .contact a:hover {
+        color: var(--gold);
+      }
+
+      /* FOOTER */
+      footer {
+        margin-top: 6rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 768px) {
+        section {
+          margin-top: 4rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <strong>{siteTitle}</strong>
+        <div>
+          <a href="#music">Music</a>
+          <a href="#shows">Shows</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <h1>{siteTitle}</h1>
+        <p>{tagline}</p>
+      </section>
+
+      <!-- MUSIC -->
+      <section id="music" class="music">
+        <h2>Music</h2>
+
+        <!-- Replace with your Spotify artist or album -->
+        <iframe
+          src="https://open.spotify.com/embed/artist/XXXXXXXX"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+        </iframe>
+      </section>
+
+      <!-- SHOWS -->
+      <section id="shows">
+        <h2>Shows</h2>
+        <div class="shows">
+          <div
+            class="bit-widget-initializer"
+            data-artist-name="Matt Kindle"
+            data-display-local-dates="true"
+            data-display-past-dates="false"
+            data-auto-style="false"
+            data-theme="dark">
+          </div>
+        </div>
+        <script src="https://widget.bandsintown.com/main.min.js"></script>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="about">
+        <h2>About</h2>
+        <p>
+          Matt Kindle is a singer-songwriter crafting honest songs rooted in
+          melody, memory, and moments that linger.
+        </p>
+        <p>
+          Inspired by quiet nights, long drives, and the spaces between words.
+        </p>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <a href="mailto:hello@mattkindle.com">Email</a>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://spotify.com" target="_blank">Spotify</a>
+        <a href="https://youtube.com" target="_blank">YouTube</a>
+      </section>
+
+      <footer>
+        © {new Date().getFullYear()} Matt Kindle
+      </footer>
+    </main>
+  </body>
+</html>
+
