@@ -70,31 +70,32 @@ const tagline = "MATT KINDLE";
         color: var(--accent);
       }
 
-      /* HERO */
    /* HERO */
 .hero {
   position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
-  align-items: center; /* vertical center content */
-  justify-content: center; /* horizontal center content */
+  align-items: flex-end; /* push content to bottom */
+  justify-content: center; /* center horizontally */
   overflow: hidden;
   margin-top: 0;
 
   /* background image settings */
   background-image: url("/mattkindle/images/hero.jpg");
   background-size: cover;
-  background-position: center center; /* center both axes for all devices */
+  background-position: center center; /* ensures image stays centered */
   background-repeat: no-repeat;
 
   /* optional parallax */
   background-attachment: fixed; /* desktop only */
+  padding-bottom: 6rem; /* add space from bottom for logo & tagline */
 }
 
 @media (max-width: 1024px) {
   .hero {
-    background-attachment: scroll; /* fixes mobile parallax issues */
+    background-attachment: scroll; /* fix mobile parallax issues */
+    padding-bottom: 4rem; /* adjust for smaller screens */
   }
 }
 
@@ -110,10 +111,10 @@ const tagline = "MATT KINDLE";
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 0 1.5rem 4rem;
   max-width: 1100px;
 }
 
+/* Logo */
 .hero-logo {
   max-width: 250px;
   width: 60%;
@@ -129,6 +130,7 @@ const tagline = "MATT KINDLE";
   filter: drop-shadow(0 0 20px rgba(16, 185, 129, 1));
 }
 
+/* Tagline */
 .hero-tagline {
   font-family: 'Rubik Dirt', serif, Georgia, Times, serif;
   font-size: clamp(2rem, 5vw, 3rem);
