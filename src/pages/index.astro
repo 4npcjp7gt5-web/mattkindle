@@ -81,12 +81,18 @@ const tagline = "MATT KINDLE";
         align-items: flex-end;
         justify-content: center;
         margin-top: 0;
+        
+          /* Parallax effect */
+  background-attachment: fixed; /* key for parallax */
+  background-repeat: no-repeat;
+  background-size: cover;
         }
       .hero-overlay {
         position: absolute;
         inset: 0;
         background: rgba(0, 0, 0, 0.45);
         z-index: 1;
+        pointer-events: none; /* ensures logo is clickable */
       }
 
       .hero-content {
