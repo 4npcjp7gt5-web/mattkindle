@@ -70,44 +70,57 @@ const tagline = "Singer · Songwriter";
       }
 
       /* HERO */
- .hero {
+<style>
+.hero {
   position: relative;
   min-height: 100vh;
   background-image: url("/mattkindle/images/hero.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* push content to bottom half */
+  justify-content: center;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 1;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem 4rem; /* extra padding at bottom */
   max-width: 1100px;
-  margin: 0 auto;
   text-align: center;
 }
 
 .hero-logo {
-  max-width: 300px;
-  width: 80%;
+  max-width: 250px;
+  width: 60%;
   height: auto;
   display: block;
   margin: 0 auto 1rem auto;
+
+  /* Emerald glow */
+  filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 1));
 }
 
 .hero p {
   color: var(--muted);
   font-size: 1.1rem;
+  margin-top: 0.5rem;
 }
+</style>
+
 
 
       /* NAV */
@@ -207,12 +220,18 @@ const tagline = "Singer · Songwriter";
     </nav>
 
     <main>
+    
       <!-- HERO -->
-    <section class="hero">
+      
+---
+const tagline = "Singer · Songwriter";
+---
+
+<section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <img src="/mattkindle/images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
-    <p>Singer · Songwriter</p>
+    <p>{tagline}</p>
   </div>
 </section>
 
