@@ -131,15 +131,18 @@ const tagline = "MATT KINDLE";
         justify-content: center;
         overflow: hidden;
         margin-top: 0;
-
-        background-image: url("/mattkindle/images/hero.jpg");
-        background-size: cover;
-        background-position: center center; /* desktop: full image */
-        background-repeat: no-repeat;
-
-        padding-bottom: 6rem;
-        background-attachment: fixed; /* parallax on desktop */
-      }
+				padding-bottom: 6rem;
+        }
+        
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills without losing content drastically */
+  object-position: center; /* can adjust to 'center bottom' on mobile */
+  z-index: 0;
+}
 
       .hero-overlay {
         position: absolute;
