@@ -81,6 +81,14 @@ const tagline = "Singer · Songwriter";
   align-items: center;
 }
 
+.hero-logo {
+  max-width: 300px;   /* adjust as needed */
+  width: 80%;         /* scales on mobile */
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -93,6 +101,7 @@ const tagline = "Singer · Songwriter";
   padding: 0 1.5rem;
   max-width: 1100px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .hero h1 {
@@ -207,7 +216,7 @@ const tagline = "Singer · Songwriter";
      <section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1>Matt Kindle</h1>
+    <img src="/images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
     <p>Singer · Songwriter</p>
   </div>
 </section>
