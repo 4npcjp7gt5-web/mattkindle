@@ -70,58 +70,54 @@ const tagline = "Singer · Songwriter";
       }
 
       /* HERO */
-<style>
-.hero {
-  position: relative;
-  min-height: 100vh;
-  background-image: url("/mattkindle/images/hero.jpg");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: flex-end; /* push content to bottom half */
-  justify-content: center;
-}
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        background-image: url("/mattkindle/images/hero.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end; /* push content to bottom half */
+        justify-content: center;
+      }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 1;
-}
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1;
+      }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 2rem 1.5rem 4rem; /* extra padding at bottom */
-  max-width: 1100px;
-  text-align: center;
-}
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem 1.5rem 4rem; /* extra padding at bottom */
+        max-width: 1100px;
+        text-align: center;
+      }
 
-.hero-logo {
-  max-width: 250px;
-  width: 60%;
-  height: auto;
-  display: block;
-  margin: 0 auto 1rem auto;
+      .hero-logo {
+        max-width: 250px;
+        width: 60%;
+        height: auto;
+        display: block;
+        margin: 0 auto 1rem auto;
 
-  /* Emerald glow */
-  filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8));
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
+        /* Emerald glow */
+        filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8));
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
 
-.hero-logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 1));
-}
+      .hero-logo:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 20px rgba(16, 185, 129, 1));
+      }
 
-.hero p {
-  color: var(--muted);
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
-}
-</style>
-
-
+      .hero p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
 
       /* NAV */
       .nav {
@@ -150,7 +146,7 @@ const tagline = "Singer · Songwriter";
       }
 
       .nav a:hover {
-        color: var(--gold);
+        color: var(--accent);
       }
 
       /* MUSIC */
@@ -186,7 +182,7 @@ const tagline = "Singer · Songwriter";
       }
 
       .contact a:hover {
-        color: var(--gold);
+        color: var(--accent);
       }
 
       /* FOOTER */
@@ -220,30 +216,30 @@ const tagline = "Singer · Songwriter";
     </nav>
 
     <main>
-    
       <!-- HERO -->
-      
----
-const tagline = "Singer · Songwriter";
----
-
-<section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <img src="/mattkindle/images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
-    <p>{tagline}</p>
-  </div>
-</section>
-
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <img src="/mattkindle/images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
+          <p>{tagline}</p>
+        </div>
+      </section>
 
       <!-- MUSIC -->
       <section id="music" class="music">
         <h2>Music</h2>
 
         <!-- Spotify -->
-        
-          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/4kPWNGfm8xjSXSsZesTk7y?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      
+        <iframe
+          data-testid="embed-iframe"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/artist/4kPWNGfm8xjSXSsZesTk7y"
+          width="100%"
+          height="352"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
       </section>
 
       <!-- SHOWS -->
@@ -277,10 +273,10 @@ const tagline = "Singer · Songwriter";
       <!-- CONTACT -->
       <section id="contact" class="contact">
         <h2>Contact</h2>
-        <a href="mailto: mallets.prompts0z@icloud.com">Email</a>
-        <a href="https://instagram.com/mattkindle" target="_blank">Instagram</a>
-        <a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y?si=Qtt2ejqIT-CV7jl6dKGnXw" target="_blank">Spotify</a>
-        <a href="https://www.youtube.com/@mattkindlemusic" target="_blank">YouTube</a>
+        <a href="mailto:mallets.prompts0z@icloud.com">Email</a>
+        <a href="https://instagram.com/mattkindle" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y?si=Qtt2ejqIT-CV7jl6dKGnXw" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noopener">YouTube</a>
       </section>
 
       <footer>
@@ -289,4 +285,3 @@ const tagline = "Singer · Songwriter";
     </main>
   </body>
 </html>
-
