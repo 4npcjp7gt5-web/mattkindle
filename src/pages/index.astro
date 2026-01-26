@@ -1,6 +1,6 @@
 ---
 const siteTitle = "Matt Kindle";
-const tagline = "Singer · Songwriter";
+const tagline = "Matt Kindle";
 ---
 
 <!DOCTYPE html>
@@ -118,6 +118,18 @@ const tagline = "Singer · Songwriter";
         font-size: 1.1rem;
         margin-top: 0.5rem;
       }
+
+    .hero-tagline {
+        font-family: 'Playfair Display', serif; /* fancier serif font */
+        font-size: clamp(2rem, 5vw, 3rem);     /* responsive size */
+        color: var(--accent);                  /* emerald green */
+        font-weight: 600;                      /* slightly bolder */
+        text-shadow: 0 0 8px rgba(16, 185, 129, 0.6); /* subtle glow */
+        margin-top: 0.5rem;
+        }
+    .hero-tagline:hover {
+        text-shadow: 0 0 12px rgba(16, 185, 129, 0.9);
+        }
 
       /* NAV */
       .nav {
@@ -237,7 +249,7 @@ const tagline = "Singer · Songwriter";
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <img src="/mattkindle/images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
-          <p>{tagline}</p>
+          <p class="hero-tagline">{tagline}</p>
         </div>
       </section>
 
