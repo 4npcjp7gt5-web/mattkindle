@@ -160,6 +160,7 @@ const tagline = "MATT KINDLE";
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative; /* allow logo to position relative to this */
       }
 
       .nav a {
@@ -175,8 +176,9 @@ const tagline = "MATT KINDLE";
   height: 50px; /* adjust size to fit nav */
   width: auto;
   margin-top: 10px; /* optional: fine-tune vertical placement */
-  position: relative;
-  bottom: -20%; /* overhang into hero section */
+  position: absolute;
+  bottom: -33%; /* overhang into hero section */
+  left: 1.5rem;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
