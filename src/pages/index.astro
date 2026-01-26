@@ -148,6 +148,22 @@ const tagline = "Singer · Songwriter";
       .nav a:hover {
         color: var(--accent);
       }
+.nav-logo {
+  height: 40px; /* adjust size to fit nav */
+  width: auto;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); /* emerald glow */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.nav-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 12px rgba(16, 185, 129, 1));
+}
+@media (max-width: 768px) {
+  .nav-logo {
+    height: 35px; /* slightly smaller on mobile */
+  }
+}
 
       /* MUSIC */
       .music iframe {
@@ -205,7 +221,7 @@ const tagline = "Singer · Songwriter";
     <!-- NAV -->
     <nav class="nav">
       <div class="nav-inner">
-        <strong>{siteTitle}</strong>
+        <img src="/mattkindle/images/mklogobw.png" alt="Matt Kindle logo" class="nav-logo" />
         <div>
           <a href="#music">Music</a>
           <a href="#shows">Shows</a>
