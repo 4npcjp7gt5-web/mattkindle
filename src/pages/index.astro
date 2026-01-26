@@ -25,7 +25,7 @@ const tagline = "Singer · Songwriter";
         --bg-soft: #161616;
         --text: #f3f3f3;
         --muted: #b5b5b5;
-        --gold: #c9a24d;
+        --emerald green: ##10b981
       }
 
       * {
@@ -70,24 +70,40 @@ const tagline = "Singer · Songwriter";
       }
 
       /* HERO */
-      .hero {
-        min-height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
+     .hero {
+  position: relative;
+  min-height: 100vh;
+  background-image: url("/images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
 
-      .hero h1 {
-        font-size: clamp(3rem, 7vw, 6rem);
-        font-weight: 600;
-        margin-bottom: 1rem;
-      }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
 
-      .hero p {
-        font-size: 1.1rem;
-        color: var(--muted);
-        max-width: 420px;
-      }
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
 
       /* NAV */
       .nav {
@@ -187,10 +203,14 @@ const tagline = "Singer · Songwriter";
 
     <main>
       <!-- HERO -->
-      <section class="hero">
-        <h1>{siteTitle}</h1>
-        <p>{tagline}</p>
-      </section>
+     <section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Matt Kindle</h1>
+    <p>Singer · Songwriter</p>
+  </div>
+</section>
+
 
       <!-- MUSIC -->
       <section id="music" class="music">
