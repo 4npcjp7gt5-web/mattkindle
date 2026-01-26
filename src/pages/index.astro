@@ -70,15 +70,21 @@ const tagline = "Singer · Songwriter";
       }
 
       /* HERO */
-     .hero {
+ .hero {
   position: relative;
   min-height: 100vh;
-  background-image: url("images/hero.jpg");
-
+  background-image: url("{import.meta.env.BASE_URL}images/hero.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
 }
 
 .hero-content {
@@ -96,17 +102,6 @@ const tagline = "Singer · Songwriter";
   height: auto;
   display: block;
   margin: 0 auto 1rem auto;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.hero h1 {
-  font-size: clamp(3rem, 8vw, 6rem);
-  margin-bottom: 0.75rem;
 }
 
 .hero p {
@@ -213,10 +208,10 @@ const tagline = "Singer · Songwriter";
 
     <main>
       <!-- HERO -->
-     <section class="hero">
+    <section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <img src="/images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
+    <img src="{import.meta.env.BASE_URL}images/mklogobw.png" alt="Matt Kindle logo" class="hero-logo" />
     <p>Singer · Songwriter</p>
   </div>
 </section>
