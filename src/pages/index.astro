@@ -147,9 +147,10 @@ const tagline = "MATT KINDLE";
         top: 0;
         left: 0;
         width: 100%;
-        background: rgba(5, 120, 90, 0.9); 
+        background: rgba(5, 120, 90, 0.9);
         backdrop-filter: blur(6px);
         z-index: 10;
+        padding: 0.5rem 1.5rem; /* thinner header */
       }
 
       .nav-inner {
@@ -171,9 +172,12 @@ const tagline = "MATT KINDLE";
         color: #ffffff;
       }
 .nav-logo {
-  height: 40px; /* adjust size to fit nav */
+  height: 50px; /* adjust size to fit nav */
   width: auto;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* emerald glow */
+  margin-top: 10px; /* optional: fine-tune vertical placement */
+  position: relative;
+  bottom: -15px; /* overhang into hero section */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
