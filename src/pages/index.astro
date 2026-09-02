@@ -11,7 +11,7 @@ const playlists = {
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="theme-color" content="#1b120d" />
   <meta name="description" content="The official website of East Texas singer-songwriter Matt Kindle. Listen to new, Christian, and country music and find upcoming shows." />
   <meta property="og:title" content="Matt Kindle — Official Website" /><meta property="og:description" content="Songs about memory, faith, family, and the roads that lead us home." /><meta property="og:type" content="website" /><meta property="og:url" content="https://mattkindle.com/" /><meta property="og:image" content="https://mattkindle.com/images/hero-tv-room.jpg" />
-  <link rel="icon" href="/favicon.ico" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&family=Stardos+Stencil:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <title>Matt Kindle — Official Website</title>
 </head>
 <body>
@@ -35,13 +35,15 @@ const playlists = {
 </style>
 
 <style is:global>
-  /* Match the distressed block lettering printed on the original album cover. */
+  /* Solid condensed block lettering, with the wear added separately like old ink on wood. */
   h1,
   h2,
   .hero__title p,
   .hero__title span,
-  .eyebrow {
-    font-family: "Stardos Stencil", Impact, sans-serif !important;
+  .eyebrow,
+  .wordmark,
+  footer span {
+    font-family: "Oswald", "Arial Narrow", Impact, sans-serif !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
   }
@@ -49,8 +51,16 @@ const playlists = {
   h1,
   h2 {
     line-height: .92 !important;
-    letter-spacing: .055em !important;
+    letter-spacing: .075em !important;
     text-shadow: 0 2px 0 rgba(80, 47, 28, .5), 0 8px 28px rgba(0, 0, 0, .4);
+    -webkit-mask-image: url("/images/distress-mask.svg");
+    mask-image: url("/images/distress-mask.svg");
+    -webkit-mask-size: 280px 180px;
+    mask-size: 280px 180px;
+    -webkit-mask-mode: alpha;
+    mask-mode: alpha;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
   }
 
   h2 { font-size: clamp(3rem, 7vw, 5.8rem) !important; }
