@@ -1,7 +1,12 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://4npcjp7gt5-web.github.io',
-  base: '/mattkindle/',
-  output: 'static'
+  site: 'https://mattkindle.com',
+  output: 'static',
+  vite: {
+    server: {
+      host: '0.0.0.0',
+      allowedHosts: ['terminal.local']
+    }
+  }
 });
