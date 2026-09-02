@@ -1,6 +1,6 @@
 ---
 const playlists = {
-  new: { label: "New Music", src: "https://embed.music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q?theme=dark", title: "Matt Kindle — New Music on Apple Music" },
+  new: { label: "New Music", comingSoon: true },
   christian: { label: "Christian", src: "https://open.spotify.com/embed/playlist/6jPZiJcsgeP1e6gAvQrLnU?utm_source=generator&theme=0", title: "Matt Kindle — Christian Music on Spotify" },
   country: { label: "Country", src: "https://open.spotify.com/embed/playlist/1dMBFwdC6Zd3sqq3mg15jI?utm_source=generator&theme=0", title: "Matt Kindle — Country Music on Spotify" },
 };
@@ -18,13 +18,50 @@ const playlists = {
   <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark" href="#top">Matt Kindle</a><div class="nav__links"><a href="#music">Music</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></div></nav>
   <header id="top" class="hero"><div class="scene"><img class="scene__room" src="/images/hero-tv-room.jpg" alt="A vintage television in an eighties bedroom, showing a grassy hill" /><div class="tv-screen" aria-hidden="true"><div class="walker"><span class="walker__shadow"></span><span class="walker__sprite"></span></div><div class="scanlines"></div></div><div class="vignette"></div></div><div class="hero__title"><p>New Music Coming October 23</p><h1 data-text="13 Channels">13 Channels</h1><span>Matt Kindle</span></div></header>
   <main>
-    <section id="music" class="section"><p class="eyebrow">Turn the dial</p><h2 data-text="Music">Music</h2><p class="section__intro">New songs, songs of faith, and country stories—each with its own place on the dial.</p><div class="channel-tabs" role="tablist" aria-label="Music channels">{Object.entries(playlists).map(([id,item],index)=><button type="button" role="tab" id={`tab-${id}`} aria-selected={index===0?"true":"false"} aria-controls="player" data-channel={id}>{item.label}</button>)}</div><div id="player" class="player" role="tabpanel" aria-labelledby="tab-new"><iframe src={playlists.new.src} title={playlists.new.title} height="450" loading="lazy" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe></div><div class="listen-links"><a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y" target="_blank" rel="noreferrer">Spotify ↗</a><a href="https://music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q" target="_blank" rel="noreferrer">Apple Music ↗</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube ↗</a></div></section>
+    <section id="music" class="section"><p class="eyebrow">Turn the dial</p><h2 data-text="Music">Music</h2><p class="section__intro">New songs, songs of faith, and country stories—each with its own place on the dial.</p><div class="channel-tabs" role="tablist" aria-label="Music channels">{Object.entries(playlists).map(([id,item],index)=><button type="button" role="tab" id={`tab-${id}`} aria-selected={index===0?"true":"false"} aria-controls="player" data-channel={id}>{item.label}</button>)}</div><div id="player" class="player" role="tabpanel" aria-labelledby="tab-new"><div class="coming-soon"><span>Channel 13</span><strong>Coming Soon</strong><p>New music arrives October 23.</p></div></div><div class="listen-links"><a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y" target="_blank" rel="noreferrer">Spotify ↗</a><a href="https://music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q" target="_blank" rel="noreferrer">Apple Music ↗</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube ↗</a></div></section>
     <section id="shows" class="section"><p class="eyebrow">Out in the world</p><h2 data-text="Shows">Shows</h2><div class="shows-card"><a class="bit-widget-initializer" data-artist-name="id_15630412" data-auto-style="false" data-background-color="transparent" data-text-color="#f2e6ca" data-separator-color="#6f513b" data-display-local-dates="true" data-display-past-dates="true" data-display-limit="all" data-app-id="695468e386442ab7aacc49b5c5ed6da8"></a></div></section>
     <section id="about" class="section about-section"><div><p class="eyebrow">Behind the songs</p><h2 data-text="About Matt">About Matt</h2></div><div class="about-copy"><p>Matt Kindle is an East Texas singer-songwriter making honest music rooted in melody, memory, faith, and the moments that linger.</p><p>His songs move between indie folk, Christian music, and country—different channels, but the same voice.</p></div></section>
     <section id="contact" class="section contact-section"><p class="eyebrow">Keep in touch</p><h2 data-text="Contact">Contact</h2><p>For music, shows, and everything in between.</p><div class="contact-links"><a href="mailto:mallets.prompts0z@icloud.com">Email</a><a href="https://www.instagram.com/matt_kindle/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube</a></div></section>
   </main>
   <footer><span>Matt Kindle</span><small>© {new Date().getFullYear()} Matt Kindle</small></footer>
-  <script is:inline define:vars={{playlists}}>document.querySelectorAll('[data-channel]').forEach((button)=>{button.addEventListener('click',()=>{const id=button.dataset.channel;const item=playlists[id];document.querySelectorAll('[data-channel]').forEach((tab)=>tab.setAttribute('aria-selected',String(tab===button)));const player=document.querySelector('#player');const frame=player.querySelector('iframe');player.setAttribute('aria-labelledby',`tab-${id}`);frame.src=item.src;frame.title=item.title;});});</script>
+  <script is:inline define:vars={{playlists}}>
+    document.querySelectorAll('[data-channel]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.channel;
+        const item = playlists[id];
+        const player = document.querySelector('#player');
+
+        document.querySelectorAll('[data-channel]').forEach((tab) => {
+          tab.setAttribute('aria-selected', String(tab === button));
+        });
+
+        player.setAttribute('aria-labelledby', `tab-${id}`);
+
+        if (item.comingSoon) {
+          player.innerHTML = `
+            <div class="coming-soon">
+              <span>Channel 13</span>
+              <strong>Coming Soon</strong>
+              <p>New music arrives October 23.</p>
+            </div>
+          `;
+        } else {
+          const frame = document.createElement('iframe');
+          frame.src = item.src;
+          frame.title = item.title;
+          frame.height = '450';
+          frame.loading = 'lazy';
+          frame.allow =
+            'autoplay *; encrypted-media *; fullscreen *; clipboard-write';
+          frame.setAttribute(
+            'sandbox',
+            'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation'
+          );
+          player.replaceChildren(frame);
+        }
+      });
+    });
+  </script>
   <script async charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
 </body>
 </html>
@@ -35,7 +72,7 @@ const playlists = {
 </style>
 
 <style is:global>
-  /* Solid condensed block lettering, with the wear added separately like old ink on wood. */
+  /* Condensed block lettering with animated analog-TV static. */
   h1,
   h2,
   .hero__title p,
@@ -54,7 +91,9 @@ const playlists = {
     display: inline-block;
     line-height: .92 !important;
     letter-spacing: .075em !important;
-    text-shadow: 0 2px 0 rgba(80, 47, 28, .5), 0 8px 28px rgba(0, 0, 0, .4);
+    text-shadow:
+      0 2px 0 rgba(80, 47, 28, .5),
+      0 8px 28px rgba(0, 0, 0, .4);
   }
 
   h1::after,
@@ -65,16 +104,54 @@ const playlists = {
     z-index: 1;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    text-shadow: none;
     pointer-events: none;
+    opacity: .82;
     background-image:
-      radial-gradient(ellipse, rgba(25, 14, 9, .88) 0 .8px, transparent 1.35px),
-      radial-gradient(circle, rgba(25, 14, 9, .62) 0 .55px, transparent 1.05px),
-      repeating-linear-gradient(103deg, transparent 0 15px, rgba(25, 14, 9, .34) 15.5px 16.5px, transparent 17px 31px);
-    background-size: 13px 17px, 19px 23px, 41px 47px;
-    background-position: 2px 3px, 7px 11px, 0 0;
+      repeating-radial-gradient(
+        circle at 20% 35%,
+        rgba(255,255,255,.95) 0 1px,
+        rgba(10,7,5,.95) 1px 2px,
+        transparent 2px 4px
+      ),
+      repeating-radial-gradient(
+        circle at 78% 62%,
+        rgba(10,7,5,.9) 0 1px,
+        rgba(242,230,202,.85) 1px 2px,
+        transparent 2px 5px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,.32) 0 1px,
+        rgba(0,0,0,.42) 1px 2px,
+        transparent 2px 4px
+      );
+    background-size: 9px 11px, 13px 15px, 100% 4px;
     -webkit-background-clip: text;
     background-clip: text;
+    animation: title-static .16s steps(2, end) infinite;
+  }
+
+  @keyframes title-static {
+    0% {
+      background-position: 0 0, 4px 7px, 0 0;
+      opacity: .65;
+    }
+    25% {
+      background-position: 7px -5px, -3px 11px, 0 1px;
+      opacity: .88;
+    }
+    50% {
+      background-position: -5px 8px, 9px -4px, 0 -1px;
+      opacity: .72;
+    }
+    75% {
+      background-position: 11px 3px, 2px -9px, 0 2px;
+      opacity: .92;
+    }
+    100% {
+      background-position: -8px -6px, -7px 5px, 0 0;
+      opacity: .68;
+    }
   }
 
   h2 { font-size: clamp(3rem, 7vw, 5.8rem) !important; }
@@ -222,5 +299,51 @@ const playlists = {
 
   @media (prefers-reduced-motion: reduce) {
     .walker__sprite { animation: none; }
+  }
+</style>
+
+<style is:global>
+  .coming-soon {
+    min-height: 260px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,.025) 0 1px,
+        transparent 1px 4px
+      ),
+      radial-gradient(circle at center, #34251b 0, #130d09 68%);
+  }
+
+  .coming-soon span {
+    color: var(--amber);
+    font: 700 .72rem/1 "Oswald", sans-serif;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+  }
+
+  .coming-soon strong {
+    margin-top: 12px;
+    color: var(--cream);
+    font: 700 clamp(2.4rem, 7vw, 5rem)/1 "Oswald", sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .coming-soon p {
+    margin: 16px 0 0;
+    color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1::after,
+    h2::after {
+      animation: none;
+    }
   }
 </style>
