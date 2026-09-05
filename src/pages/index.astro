@@ -11,8 +11,12 @@ const playlists = {
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="theme-color" content="#1b120d" />
   <meta name="description" content="The official website of East Texas singer-songwriter Matt Kindle. Listen to new, Christian, and country music and find upcoming shows." />
   <meta property="og:title" content="Matt Kindle — Official Website" /><meta property="og:description" content="Songs about memory, faith, family, and the roads that lead us home." /><meta property="og:type" content="website" /><meta property="og:url" content="https://mattkindle.com/" /><meta property="og:image" content="https://mattkindle.com/images/hero-tv-room.jpg" />
-  <link rel="icon" href="/favicon.ico" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <title>Matt Kindle — Official Website</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 </head>
 <body>
   <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#music">Music</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></div></nav>
@@ -57,43 +61,71 @@ const playlists = {
     text-shadow: 0 2px 0 rgba(80, 47, 28, .5), 0 8px 28px rgba(0, 0, 0, .4);
   }
 
-  h1::after,
-  h2::after {
+  /* CRT title treatment: subtle scanlines + an occasional horizontal tracking glitch. */
+  h1::before,
+  h2::before {
     content: attr(data-text);
     position: absolute;
     inset: 0;
     z-index: 2;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    text-shadow: none;
     pointer-events: none;
-    opacity: .88;
-    background-image:
-      repeating-linear-gradient(0deg,
-        rgba(255,255,255,.30) 0 1px,
-        rgba(32,18,10,.55) 1px 2px,
-        transparent 2px 4px),
-      repeating-linear-gradient(90deg,
-        transparent 0 7px,
-        rgba(255,245,220,.22) 7px 9px,
-        rgba(30,17,9,.38) 9px 11px,
-        transparent 11px 18px),
-      radial-gradient(circle at 18% 34%, rgba(255,255,255,.48) 0 1px, transparent 1.6px),
-      radial-gradient(circle at 74% 61%, rgba(22,12,7,.8) 0 1.2px, transparent 2px),
-      radial-gradient(circle at 46% 18%, rgba(255,255,255,.34) 0 .8px, transparent 1.6px);
-    background-size: auto, auto, 17px 13px, 23px 19px, 29px 17px;
-    background-position: 0 0, 0 0, 2px 5px, 11px 3px, 7px 9px;
+    opacity: .34;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(255, 246, 226, .34) 0 1px,
+      transparent 1px 4px
+    );
     -webkit-background-clip: text;
     background-clip: text;
-    animation: title-static .22s steps(2,end) infinite;
   }
 
-  @keyframes title-static {
-    0%   { background-position: 0 0, 0 0, 2px 5px, 11px 3px, 7px 9px; }
-    25%  { background-position: 0 1px, -3px 0, 8px 1px, 3px 9px, 12px 4px; }
-    50%  { background-position: 0 -1px, 2px 0, 1px 10px, 15px 2px, 4px 12px; }
-    75%  { background-position: 0 2px, -1px 0, 10px 7px, 6px 13px, 15px 1px; }
-    100% { background-position: 0 0, 0 0, 2px 5px, 11px 3px, 7px 9px; }
+  h1::after,
+  h2::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    color: rgba(247, 236, 214, .72);
+    -webkit-text-fill-color: rgba(247, 236, 214, .72);
+    text-shadow: -2px 0 rgba(80, 47, 28, .34), 2px 0 rgba(255, 246, 226, .18);
+    pointer-events: none;
+    opacity: 0;
+    clip-path: inset(47% 0 43% 0);
+    animation: title-tracking 6.4s steps(1, end) infinite;
+  }
+
+  @keyframes title-tracking {
+    0%, 88%, 100% {
+      opacity: 0;
+      transform: translateX(0);
+      clip-path: inset(47% 0 43% 0);
+    }
+    89% {
+      opacity: .45;
+      transform: translateX(-2px);
+      clip-path: inset(28% 0 63% 0);
+    }
+    90% {
+      opacity: .28;
+      transform: translateX(3px);
+      clip-path: inset(62% 0 27% 0);
+    }
+    91% {
+      opacity: .38;
+      transform: translateX(-1px);
+      clip-path: inset(43% 0 46% 0);
+    }
+    92% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    h1::after,
+    h2::after { animation: none !important; opacity: 0 !important; }
   }
 
   h2 { font-size: clamp(3rem, 7vw, 5.8rem) !important; }
