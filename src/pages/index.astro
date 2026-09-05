@@ -10,7 +10,7 @@ const playlists = {
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="theme-color" content="#1b120d" />
   <meta name="description" content="The official website of East Texas singer-songwriter Matt Kindle. Listen to new, Christian, and country music and find upcoming shows." />
-  <meta property="og:title" content="Matt Kindle — Official Website" /><meta property="og:description" content="Songs about memory, faith, family, and the roads that lead us home." /><meta property="og:type" content="website" /><meta property="og:url" content="https://mattkindle.com/" /><meta property="og:image" content="https://mattkindle.com/images/hero-tv-room.jpg" />
+  <meta property="og:title" content="Matt Kindle — Official Website" /><meta property="og:description" content="Songs about memory, faith, family, and the roads that lead us home." /><meta property="og:type" content="website" /><meta property="og:url" content="https://mattkindle.com/" /><meta property="og:image" content="https://mattkindle.com/images/hero-bookmarked-sept2026.webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <title>Matt Kindle — Official Website</title>
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -20,11 +20,11 @@ const playlists = {
 </head>
 <body>
   <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#music">Music</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></div></nav>
-  <header id="top" class="hero"><div class="scene"><img class="scene__room" src="/images/hero-tv-room.jpg" alt="A vintage television in an eighties bedroom, showing a grassy hill" /><div class="tv-screen" aria-hidden="true"><div class="walker"><span class="walker__shadow"></span><span class="walker__sprite"></span></div><div class="scanlines"></div></div><div class="vignette"></div></div><div class="hero__title"><p>New Music Coming October 23</p><h1 data-text="13 Channels">13 Channels</h1><span>Matt Kindle</span></div></header>
+  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-bookmarked-sept2026.webp" alt="Matt Kindle playing acoustic guitar in a cinematic retro studio with vintage televisions and New Music Coming October 23 lettering" fetchpriority="high" /></header>
   <main>
     <section id="music" class="section"><p class="eyebrow">Turn the dial</p><h2 data-text="Music">Music</h2><p class="section__intro">New songs, songs of faith, and country stories—each with its own place on the dial.</p><div class="channel-tabs" role="tablist" aria-label="Music channels">{Object.entries(playlists).map(([id,item],index)=><button type="button" role="tab" id={`tab-${id}`} aria-selected={index===0?"true":"false"} aria-controls="player" data-channel={id}>{item.label}</button>)}</div><div id="player" class="player" role="tabpanel" aria-labelledby="tab-new"><iframe src={playlists.new.src} title={playlists.new.title} height="450" loading="lazy" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe></div><div class="listen-links"><a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y" target="_blank" rel="noreferrer">Spotify ↗</a><a href="https://music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q" target="_blank" rel="noreferrer">Apple Music ↗</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube ↗</a></div></section>
     <section id="shows" class="section"><p class="eyebrow">Out in the world</p><h2 data-text="Shows">Shows</h2><div class="shows-card"><a class="bit-widget-initializer" data-artist-name="id_15630412" data-auto-style="false" data-background-color="transparent" data-text-color="#f2e6ca" data-separator-color="#6f513b" data-display-local-dates="true" data-display-past-dates="true" data-display-limit="all" data-app-id="695468e386442ab7aacc49b5c5ed6da8"></a></div></section>
-    <section id="about" class="section about-section"><div><p class="eyebrow">Behind the songs</p><h2 data-text="About Matt">About Matt</h2></div><div class="about-copy"><p>Matt Kindle is an East Texas singer-songwriter making honest music rooted in melody, memory, faith, and the moments that linger.</p><p>His songs move between indie folk, Christian music, and country—different channels, but the same voice.</p></div></section>
+    <section id="about" class="section about-section"><div class="about-visual"><p class="eyebrow">Behind the songs</p><h2 data-text="About Matt">About Matt</h2><div class="about-photo-wrap"><img class="about-photo" src="/images/about-matt-performance-sept2026.webp" alt="Matt Kindle singing into a microphone on stage" loading="lazy" /></div></div><div class="about-copy"><p>Matt Kindle is an East Texas singer-songwriter making honest music rooted in melody, memory, faith, and the moments that linger.</p><p>His songs move between indie folk, Christian music, and country—different channels, but the same voice.</p></div></section>
     <section id="contact" class="section contact-section"><p class="eyebrow">Keep in touch</p><h2 data-text="Contact">Contact</h2><p>For music, shows, and everything in between.</p><div class="contact-links"><a href="mailto:mallets.prompts0z@icloud.com">Email</a><a href="https://www.instagram.com/matt_kindle/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube</a></div></section>
   </main>
   <footer><a class="footer-logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="footer-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><small>© {new Date().getFullYear()} Matt Kindle</small></footer>
@@ -353,5 +353,59 @@ const playlists = {
       max-width: 170px;
     }
     .nav__links { gap: 10px; }
+  }
+</style>
+
+<style is:global>
+  /* Sept 2026 hero + About image update */
+  .hero--photo {
+    padding-top: 66px;
+    background: #120c08;
+  }
+  .hero-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 820px;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .about-section {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: clamp(42px, 7vw, 88px);
+  }
+  .about-visual h2 {
+    margin-bottom: 28px;
+  }
+  .about-photo-wrap {
+    overflow: hidden;
+    border: 1px solid rgba(217,155,74,.24);
+    border-radius: 18px;
+    background: #130d09;
+    box-shadow: 0 28px 70px rgba(0,0,0,.34);
+    aspect-ratio: 4 / 5;
+  }
+  .about-photo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 61% 50%;
+    filter: saturate(.78) contrast(1.04) brightness(.92);
+  }
+  @media (max-width: 700px) {
+    .hero--photo { padding-top: 58px; }
+    .hero-photo {
+      width: 150%;
+      max-width: none;
+      margin-left: -25%;
+      min-height: 52vw;
+      object-fit: cover;
+      object-position: 50% center;
+    }
+    .about-section { grid-template-columns: 1fr; gap: 30px; }
+    .about-photo-wrap { aspect-ratio: 1 / 1; }
+    .about-photo { object-position: 62% 45%; }
   }
 </style>
