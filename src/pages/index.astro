@@ -395,14 +395,24 @@ const playlists = {
     filter: saturate(.78) contrast(1.04) brightness(.92);
   }
   @media (max-width: 700px) {
-    .hero--photo { padding-top: 58px; }
+    .hero--photo {
+      padding-top: 58px;
+      height: auto !important;
+      min-height: 0 !important;
+      display: block !important;
+      overflow: visible !important;
+      background: #120c08;
+    }
     .hero-photo {
-      width: 150%;
-      max-width: none;
-      margin-left: -25%;
-      min-height: 52vw;
-      object-fit: cover;
-      object-position: 50% center;
+      display: block;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      margin-left: 0 !important;
+      min-height: 0 !important;
+      object-fit: contain !important;
+      object-position: center top !important;
     }
     .about-section { grid-template-columns: 1fr; gap: 30px; }
     .about-photo-wrap { aspect-ratio: 1 / 1; }
