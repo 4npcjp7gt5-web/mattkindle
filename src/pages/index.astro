@@ -4,6 +4,12 @@ const playlists = {
   christian: { label: "Christian", src: "https://open.spotify.com/embed/playlist/6jPZiJcsgeP1e6gAvQrLnU?utm_source=generator&theme=0", title: "Matt Kindle — Christian Music on Spotify" },
   country: { label: "Country", src: "https://open.spotify.com/embed/playlist/1dMBFwdC6Zd3sqq3mg15jI?utm_source=generator&theme=0", title: "Matt Kindle — Country Music on Spotify" },
 };
+const ghostLinks = {
+  spotify: "https://open.spotify.com/track/5iBGF0h5J0T3JVB3q5HFHG",
+  apple: "https://music.apple.com/us/album/ghost-single/6809943132",
+  amazon: "https://music.amazon.com/albums/B0HJ6S8WZJ?do=play&trackAsin=B0HJ6TZP57",
+  youtube: "https://youtu.be/BSAe7W8Hyvg",
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -19,9 +25,10 @@ const playlists = {
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 </head>
 <body>
-  <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#music">Music</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></div></nav>
-  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-bookmarked-sept2026.webp" alt="Matt Kindle playing acoustic guitar in a cinematic retro studio with vintage televisions and New Music Coming October 23 lettering" fetchpriority="high" /></header>
+  <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#album">13 Channels</a><a href="#music">Music</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></div></nav>
+  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-bookmarked-sept2026.webp" alt="Matt Kindle playing acoustic guitar in a cinematic retro studio with vintage televisions and New Music Coming October 23 lettering" fetchpriority="high" /><div class="hero-release"><span>New album · October 23</span><a href="#album">Explore 13 Channels ↓</a></div></header>
   <main>
+    <section id="album" class="section album-release" aria-labelledby="album-title"><div class="album-release__art"><img src="/images/13-channels-card-front.png" alt="13 Channels by Matt Kindle — vintage television album artwork" loading="eager" /></div><div class="album-release__copy"><p class="eyebrow">New album · October 23</p><h2 id="album-title" data-text="13 Channels">13 Channels</h2><p class="album-release__intro">Eighteen songs about memory, family, faith, and the things that stay with us. Start with the new single, <strong>Ghost</strong>.</p><p class="release-label">Ghost · out now</p><div class="release-links" aria-label="Listen to Ghost"><a href={ghostLinks.spotify} target="_blank" rel="noreferrer">Spotify ↗</a><a href={ghostLinks.apple} target="_blank" rel="noreferrer">Apple Music ↗</a><a href={ghostLinks.amazon} target="_blank" rel="noreferrer">Amazon Music ↗</a><a href={ghostLinks.youtube} target="_blank" rel="noreferrer">YouTube ↗</a></div><a class="ghost-page-link" href="/ghost">Open the Ghost listening page →</a></div></section>
     <section id="music" class="section"><p class="eyebrow">Turn the dial</p><h2 data-text="Music">Music</h2><p class="section__intro">New songs, songs of faith, and country stories—each with its own place on the dial.</p><div class="channel-tabs" role="tablist" aria-label="Music channels">{Object.entries(playlists).map(([id,item],index)=><button type="button" role="tab" id={`tab-${id}`} aria-selected={index===0?"true":"false"} aria-controls="player" data-channel={id}>{item.label}</button>)}</div><div id="player" class="player" role="tabpanel" aria-labelledby="tab-new"><iframe src={playlists.new.src} title={playlists.new.title} height="450" loading="lazy" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe></div><div class="listen-links"><a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y" target="_blank" rel="noreferrer">Spotify ↗</a><a href="https://music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q" target="_blank" rel="noreferrer">Apple Music ↗</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube ↗</a></div></section>
     <section id="shows" class="section"><p class="eyebrow">Out in the world</p><h2 data-text="Shows">Shows</h2><div class="shows-card"><a class="bit-widget-initializer" data-artist-name="id_15630412" data-auto-style="false" data-background-color="transparent" data-text-color="#f2e6ca" data-separator-color="#6f513b" data-display-local-dates="true" data-display-past-dates="true" data-display-limit="all" data-app-id="695468e386442ab7aacc49b5c5ed6da8"></a></div></section>
     <section id="about" class="section about-section"><div class="about-visual"><p class="eyebrow">Behind the songs</p><h2 data-text="About Matt">About Matt</h2><div class="about-photo-wrap"><img class="about-photo" src="/images/about-matt-performance-sept2026.webp" alt="Matt Kindle singing into a microphone on stage" loading="lazy" /></div></div><div class="about-copy"><p>Matt Kindle is an East Texas singer-songwriter making honest music rooted in melody, memory, faith, and the moments that linger.</p><p>His songs move between indie folk, Christian music, and country—different channels, but the same voice.</p></div></section>
@@ -36,6 +43,102 @@ const playlists = {
 :root{--walnut:#1b120d;--card:#322117;--cream:#f2e6ca;--muted:#bda98c;--amber:#d99b4a;--line:#624630}*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--walnut)}body{margin:0;color:var(--cream);background:var(--walnut);font-family:Inter,system-ui,sans-serif;line-height:1.65;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 110px),linear-gradient(180deg,#120c08,var(--walnut) 45rem)}a{color:inherit;text-decoration:none}.nav{position:fixed;z-index:50;top:0;left:0;width:100%;border-bottom:1px solid rgba(217,155,74,.2);background:rgba(20,13,9,.8);backdrop-filter:blur(14px)}.nav__inner{max-width:1100px;height:66px;margin:auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}.wordmark{font-family:"Playfair Display",serif;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--amber)}.nav__links{display:flex;gap:28px;font-size:.86rem;color:var(--muted)}.nav a:hover,.nav a:focus-visible{color:var(--cream)}.hero{padding-top:66px;overflow:hidden}.scene{position:relative;width:100%;line-height:0}.scene__room{display:block;width:100%;height:auto}.tv-screen{position:absolute;left:25.3%;top:39.1%;width:40.6%;height:37%;overflow:hidden}.walker{position:absolute;left:40%;bottom:3%;height:36%;transform:translateX(-50%);animation:walk-up 22s cubic-bezier(.4,0,.6,1) infinite}.walker img{height:100%;width:auto;filter:saturate(.83) contrast(.94) brightness(.94);animation:bob .9s ease-in-out infinite}.scanlines{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(0,0,0,.28) 0 1px,transparent 1px 4px);animation:flicker 4s ease-in-out infinite}.vignette{position:absolute;inset:0;box-shadow:inset 0 0 190px rgba(10,6,3,.86);background:linear-gradient(0deg,var(--walnut),transparent 32%)}.hero__title{position:relative;z-index:2;margin-top:-8vw;padding:0 24px 68px;text-align:center}.hero__title p,.eyebrow{margin:0 0 10px;font-family:Audiowide,sans-serif;font-size:.66rem;letter-spacing:.48em;text-transform:uppercase;color:var(--amber)}.hero__title h1{margin:0;font-family:"Great Vibes",cursive;font-weight:400;font-size:clamp(4.4rem,10vw,9rem);line-height:1;color:#f7ecd6;text-shadow:0 8px 30px #080503}.hero__title span{display:block;margin-top:12px;font-family:"Playfair Display",serif;letter-spacing:.5em;text-transform:uppercase;color:#cdb487}.section{max-width:1050px;margin:auto;padding:96px 28px;scroll-margin-top:60px;border-top:1px solid rgba(98,70,48,.45)}h2{margin:0;font:600 clamp(2.7rem,6vw,4.5rem)/1 "Playfair Display",serif;color:var(--cream)}.section__intro{max-width:600px;margin:18px 0 32px;color:var(--muted);font-size:1.05rem}.channel-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:34px 0 20px}.channel-tabs button{border:1px solid var(--line);border-radius:999px;padding:11px 20px;background:transparent;color:var(--muted);font:600 .85rem Inter;cursor:pointer}.channel-tabs button[aria-selected="true"]{border-color:var(--amber);background:var(--amber);color:#1a100a;box-shadow:0 0 30px rgba(217,155,74,.2)}.player{padding:10px;border:1px solid var(--line);border-radius:18px;background:#130d09;box-shadow:0 24px 60px rgba(0,0,0,.28)}.player iframe{display:block;width:100%;border:0;border-radius:10px}.listen-links,.contact-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:22px;color:var(--amber);font-weight:600}.shows-card{margin-top:35px;padding:28px;border:1px solid var(--line);border-radius:18px;background:rgba(50,33,23,.5)}.about-section{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}.about-copy{color:var(--muted);font-family:"Playfair Display",serif;font-size:1.25rem}.about-copy p:first-child{margin-top:0}.contact-section{text-align:center}.contact-section .eyebrow{margin-left:.48em}.contact-section>p:not(.eyebrow){color:var(--muted)}.contact-links{justify-content:center}footer{max-width:1050px;margin:auto;padding:42px 28px 52px;border-top:1px solid rgba(98,70,48,.45);display:flex;justify-content:space-between;color:var(--muted)}footer span{font-family:"Playfair Display",serif;color:var(--amber)}
 @keyframes walk-up{0%{left:40%;bottom:3%;height:36%;opacity:0}6%{opacity:1}92%{opacity:1}100%{left:56%;bottom:45%;height:11%;opacity:.82}}@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-8%) rotate(1.2deg)}}@keyframes flicker{0%,100%{opacity:.1}47%{opacity:.18}52%{opacity:.05}}
 @media(max-width:700px){.nav__inner{height:58px;padding:0 18px}.wordmark{font-size:.84rem}.nav__links{gap:13px;font-size:.72rem}.nav__links a:nth-child(3){display:none}.hero{padding-top:58px}.scene__room{width:150%;max-width:none;margin-left:-25%}.tv-screen{left:13%;top:39.1%;width:60.9%;height:37%}.hero__title{margin-top:-5vw;padding-bottom:55px}.hero__title p{font-size:.55rem}.hero__title span{font-size:.72rem}.section{padding:72px 20px}.about-section{grid-template-columns:1fr;gap:24px}.player iframe{height:420px}footer{padding:35px 20px;gap:18px;flex-direction:column;text-align:center}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.walker,.walker img,.scanlines,h1::before,h2::before,h1::after,h2::after{animation:none}}
+</style>
+
+<style is:global>
+  .hero--photo { position: relative; }
+  .hero-release {
+    position: absolute;
+    z-index: 8;
+    left: 50%;
+    bottom: clamp(18px, 3vw, 42px);
+    transform: translateX(-50%);
+    width: min(92%, 680px);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border: 1px solid rgba(242,230,202,.3);
+    border-radius: 999px;
+    background: rgba(18,12,8,.84);
+    box-shadow: 0 14px 42px rgba(0,0,0,.42);
+    backdrop-filter: blur(12px);
+  }
+  .hero-release span {
+    color: var(--cream);
+    font: 700 .72rem/1 Inter,system-ui,sans-serif;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .hero-release a {
+    flex: 0 0 auto;
+    padding: 9px 15px;
+    border-radius: 999px;
+    background: var(--amber);
+    color: #1a100a;
+    font-size: .78rem;
+    font-weight: 700;
+  }
+  .album-release {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+    align-items: center;
+    gap: clamp(36px, 7vw, 84px);
+  }
+  .album-release__art {
+    overflow: hidden;
+    border: 1px solid rgba(217,155,74,.32);
+    border-radius: 18px;
+    background: #0e0906;
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+  }
+  .album-release__art img { display: block; width: 100%; height: auto; }
+  .album-release__copy h2 { margin-bottom: 24px; }
+  .album-release__intro { margin: 0 0 28px; color: var(--muted); font-size: 1.06rem; }
+  .album-release__intro strong { color: var(--cream); }
+  .release-label {
+    margin: 0 0 12px;
+    color: var(--cream);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .release-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .release-links a {
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--cream);
+    background: rgba(50,33,23,.48);
+    font-size: .86rem;
+    font-weight: 600;
+    text-align: center;
+    transition: border-color .18s ease, transform .18s ease, background .18s ease;
+  }
+  .release-links a:hover,
+  .release-links a:focus-visible { transform: translateY(-2px); border-color: var(--amber); background: rgba(74,48,31,.72); }
+  .ghost-page-link { display: inline-block; margin-top: 18px; color: var(--amber); font-weight: 600; }
+  @media (max-width: 700px) {
+    .hero-release {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      transform: none;
+      width: calc(100% - 32px);
+      margin: -16px auto 18px;
+      border-radius: 16px;
+    }
+    .album-release { grid-template-columns: 1fr; gap: 34px; }
+    .album-release__copy { text-align: center; }
+    .album-release__copy .eyebrow { margin-left: .2em; }
+    .release-links { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 430px) {
+    .hero-release { align-items: stretch; flex-direction: column; text-align: center; }
+    .release-links { grid-template-columns: 1fr; }
+  }
 </style>
 
 <style is:global>
