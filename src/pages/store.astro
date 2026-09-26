@@ -1,0 +1,37 @@
+---
+// Add checkout URLs after the Kunaki CD and Fourthwall products are published.
+// Empty URLs keep the buttons disabled rather than sending buyers to an unfinished checkout.
+const cdCheckoutUrl = 'http://Kunaki.com/Sales.asp?PID=PX00S68AR3&PP=1';
+const merchShopUrl = '';
+const cdAvailable = Boolean(cdCheckoutUrl);
+const merchAvailable = Boolean(merchShopUrl);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#1b120d" />
+  <meta name="description" content="Shop 13 Channels CDs and Matt Kindle merchandise. Made to order and shipped directly to you." />
+  <title>Store | Matt Kindle</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav aria-label="Main navigation"><div class="nav-inner"><a class="brand" href="/">Matt Kindle</a><div class="nav-links"><a href="/#music">Music</a><a href="/store/" aria-current="page">Store</a><a href="/#shows">Shows</a><a href="/#contact">Contact</a></div></div></nav>
+  <main>
+    <header><p class="eyebrow">Matt Kindle / 13 Channels</p><h1>Store</h1><p class="lead">Bring a little of the music home. CDs and merch are made when you order, then shipped to you.</p></header>
+    <div class="products">
+      <article class="product"><div class="product-image"><img src="/images/13-channels-card-front.png" alt="The 13 Channels artwork: a vintage TV showing a grassy hill" /></div><div class="product-copy"><p class="eyebrow">Physical album</p><h2>13 Channels on CD</h2><p>The album in a jewel case, made and shipped by Kunaki when you order.</p>{cdAvailable ? <a class="button" href={cdCheckoutUrl} rel="noopener noreferrer" target="_blank">Order the CD ↗</a> : <span class="button unavailable" aria-disabled="true">CD ordering opens soon</span>}</div></article>
+      <article class="product merch"><div class="product-image"><span>MK<span class="small">Matt Kindle</span></span></div><div class="product-copy"><p class="eyebrow">Made to order</p><h2>Wear the music</h2><p>Matt Kindle apparel and other merch, printed and shipped through Fourthwall.</p>{merchAvailable ? <a class="button" href={merchShopUrl} rel="noopener noreferrer" target="_blank">Shop merch ↗</a> : <span class="button unavailable" aria-disabled="true">Merch is coming soon</span>}</div></article>
+    </div>
+    <p class="note">CDs and merch have separate checkouts and may arrive in separate shipments. Shipping costs are shown at checkout.</p>
+  </main>
+  <footer><a href="/">← Back to music</a><span>© {new Date().getFullYear()} Matt Kindle</span></footer>
+</body>
+</html>
+<style>
+:root{--bg:#1b120d;--cream:#f2e6ca;--muted:#bda98c;--amber:#d99b4a;--line:#624630}*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;color:var(--cream);background:linear-gradient(#120c08,var(--bg) 32rem);font:16px/1.6 Inter,system-ui,sans-serif}a{color:inherit;text-decoration:none}nav{border-bottom:1px solid var(--line);background:#160e0a}.nav-inner{max-width:1100px;min-height:66px;padding:12px 28px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand,h1,h2,.eyebrow{font-family:Oswald,Impact,sans-serif;text-transform:uppercase}.brand{font-size:1.15rem;letter-spacing:.14em;color:var(--amber)}.nav-links{display:flex;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}.nav-links a:hover,.nav-links a[aria-current]{color:var(--cream)}main{max-width:1100px;padding:55px 28px 90px;margin:auto}header{max-width:730px;margin-bottom:42px}.eyebrow{color:var(--amber);letter-spacing:.2em;font-size:.88rem;margin:0 0 12px}h1{font-size:clamp(4rem,10vw,8rem);letter-spacing:.07em;line-height:.95;margin:0}h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:.045em;line-height:1.1;margin:0 0 18px}.lead{font-size:1.15rem;color:var(--muted);max-width:540px}.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.product{overflow:hidden;border:1px solid var(--line);background:#2b1d15;border-radius:12px}.product-image{aspect-ratio:1.5;overflow:hidden;background:#120b08;display:flex;align-items:center;justify-content:center}.product-image img{width:100%;height:100%;object-fit:cover}.product-copy{padding:30px}.product-copy p:not(.eyebrow){color:var(--muted);min-height:3.2em}.merch .product-image{background:radial-gradient(circle at center,#62412b,#1b120d 72%);color:#efdbb9}.merch .product-image>span{font:700 clamp(5rem,12vw,10rem)/1 Oswald;letter-spacing:-.08em;text-shadow:0 8px 20px #100905}.merch .small{display:block;text-align:center;font:600 .85rem Inter;letter-spacing:.4em;text-transform:uppercase}.button{display:inline-block;padding:12px 22px;margin-top:10px;border-radius:3px;background:var(--amber);color:#211309;font-weight:700}.button:hover{background:#f1bb73}.button.unavailable{background:#584636;color:#e0ceb4;cursor:default}.note{margin:30px 0 0;color:var(--muted);font-size:.9rem}footer{border-top:1px solid var(--line);max-width:1100px;margin:auto;padding:28px;display:flex;justify-content:space-between;gap:20px;color:var(--muted)}footer a:hover{color:var(--cream)}@media(max-width:700px){.nav-inner{padding:12px 18px}.nav-links{gap:12px;font-size:.8rem}.nav-links a:first-child,.nav-links a:last-child{display:none}main{padding:40px 18px 65px}.products{grid-template-columns:1fr}.product-copy p:not(.eyebrow){min-height:0}footer{padding:25px 18px;flex-direction:column}}
+</style>
