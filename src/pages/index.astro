@@ -522,3 +522,12 @@ const ghostLinks = {
     .about-photo { object-position: 62% 45%; }
   }
 </style>
+
+<style is:global>
+  @media (max-width: 700px) {
+    .nav__links a[href="#album"],
+    .nav__links a[href="#shows"],
+    .nav__links a[href="#about"] { display: none !important; }
+    .nav__links a[href="/store/"] { display: inline !important; }
+  }
+</style>
