@@ -1,11 +1,9 @@
 ---
-// Direct checkout links for the published CD and Fourthwall shirts.
-const cdCheckoutUrl = 'http://Kunaki.com/Sales.asp?PID=PX00S68AR3&PP=1';
+// Fourthwall shirts remain available while CD orders are paused.
 const shirts = [
   { name: 'Matt Kindle T-shirt', url: 'https://matt-kindle-shop.fourthwall.com/products/matt-kindle-t-shirt' },
   { name: "Look at Me, I’m Invisible tee", url: 'https://matt-kindle-shop.fourthwall.com/products/look-at-me-im-invisible-graphic-tee' },
 ];
-const cdAvailable = Boolean(cdCheckoutUrl);
 ---
 <!doctype html>
 <html lang="en">
@@ -25,7 +23,7 @@ const cdAvailable = Boolean(cdCheckoutUrl);
   <main>
     <header><p class="eyebrow">Matt Kindle / 13 Channels</p><h1>Store</h1><p class="lead">Bring a little of the music home. CDs and merch are made when you order, then shipped to you.</p></header>
     <div class="products">
-      <article class="product"><div class="product-image"><img src="/images/13-channels-card-front.png" alt="The 13 Channels artwork: a vintage TV showing a grassy hill" /></div><div class="product-copy"><p class="eyebrow">Physical album</p><h2>13 Channels on CD</h2><p>The album in a jewel case, made and shipped by Kunaki when you order.</p>{cdAvailable ? <a class="button" href={cdCheckoutUrl} rel="noopener noreferrer" target="_blank">Order the CD ↗</a> : <span class="button unavailable" aria-disabled="true">CD ordering opens soon</span>}</div></article>
+      <article class="product"><div class="product-image"><img src="/images/13-channels-store-cover.jpg" alt="13 Channels album artwork: a vintage TV showing a boy facing a grassy hill" /></div><div class="product-copy"><p class="eyebrow">Physical album</p><h2>13 Channels on CD</h2><p>The album in a jewel case. Orders open October 23; Kunaki will make and ship each CD.</p><span class="button unavailable" aria-disabled="true">Coming October 23</span></div></article>
       <article class="product merch"><div class="product-image"><span>MK<span class="small">Matt Kindle</span></span></div><div class="product-copy"><p class="eyebrow">Made to order</p><h2>Wear the music</h2><p>Two made-to-order tees, printed and shipped through Fourthwall. Pick your favorite:</p><div class="shirt-links">{shirts.map((shirt) => <a class="button" href={shirt.url} rel="noopener noreferrer" target="_blank">{shirt.name} ↗</a>)}</div><a class="shop-all" href="https://matt-kindle-shop.fourthwall.com/" rel="noopener noreferrer" target="_blank">Browse all merch ↗</a></div></article>
     </div>
     <p class="note">CDs and merch have separate checkouts and may arrive in separate shipments. Shipping costs are shown at checkout.</p>
