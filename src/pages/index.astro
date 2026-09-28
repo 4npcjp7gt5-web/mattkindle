@@ -124,22 +124,12 @@ const ghostLinks = {
   .release-links a:focus-visible { transform: translateY(-2px); border-color: var(--amber); background: rgba(74,48,31,.72); }
   .ghost-page-link { display: inline-block; margin-top: 18px; color: var(--amber); font-weight: 600; }
   @media (max-width: 700px) {
-    .hero-release {
-      position: relative;
-      left: auto;
-      bottom: auto;
-      transform: none;
-      width: calc(100% - 32px);
-      margin: -16px auto 18px;
-      border-radius: 16px;
-    }
     .album-release { grid-template-columns: 1fr; gap: 34px; }
     .album-release__copy { text-align: center; }
     .album-release__copy .eyebrow { margin-left: .2em; }
     .release-links { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 430px) {
-    .hero-release { align-items: stretch; flex-direction: column; text-align: center; }
     .release-links { grid-template-columns: 1fr; }
   }
 </style>
@@ -265,17 +255,6 @@ const ghostLinks = {
 
   h2 { font-size: clamp(3rem, 7vw, 5.8rem) !important; }
 
-  .hero {
-    position: relative !important;
-    height: 100svh !important;
-    min-height: 100svh !important;
-    padding-top: 66px !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    overflow: hidden !important;
-  }
-
   .scene {
     flex: none !important;
     width: min(100%, calc(116.36svh - 77px)) !important;
@@ -312,11 +291,6 @@ const ghostLinks = {
   }
 
   @media (max-width: 700px) {
-    .hero {
-      min-height: 100svh !important;
-      padding-top: 58px !important;
-    }
-
     .scene {
       width: 100% !important;
     }
@@ -506,19 +480,8 @@ const ghostLinks = {
       height: auto !important;
       min-height: 0 !important;
       display: block !important;
-      overflow: visible !important;
+      overflow: hidden !important;
       background: #120c08;
-    }
-    .hero-photo {
-      display: block;
-      width: 100% !important;
-      max-width: 100% !important;
-      height: auto !important;
-      max-height: none !important;
-      margin-left: 0 !important;
-      min-height: 0 !important;
-      object-fit: contain !important;
-      object-position: center top !important;
     }
     .about-section { grid-template-columns: 1fr; gap: 30px; }
     .about-photo-wrap { aspect-ratio: 1 / 1; }
@@ -536,8 +499,9 @@ const ghostLinks = {
 </style>
 
 <style is:global>
-  /* Portrait phones only. Desktop and landscape keep the existing layout. */
+  /* Keep the hero in normal document flow across screen orientations. */
   .portrait-menu { display: none; }
+  .hero.hero--photo { height: auto; min-height: 0; display: block; }
   .hero-mobile-copy {
     position: absolute;
     z-index: 2;
@@ -588,14 +552,14 @@ const ghostLinks = {
       box-shadow: 0 22px 30px rgba(0,0,0,.45);
     }
     .portrait-menu__links a { display: block; padding: 13px 10px; border-bottom: 1px solid rgba(242,230,202,.13); color: var(--cream); }
-    .hero--photo {
+    .hero.hero--photo {
       height: auto !important;
       min-height: 0 !important;
       padding-top: 58px !important;
       display: block !important;
       overflow: hidden !important;
     }
-    .hero-photo {
+    .hero.hero--photo .hero-photo {
       display: block;
       width: 100% !important;
       max-width: 100% !important;
@@ -605,7 +569,7 @@ const ghostLinks = {
       object-fit: cover !important;
       object-position: center center !important;
     }
-    .hero-mobile-copy {
+    .hero.hero--photo .hero-mobile-copy {
       display: block;
       position: static;
       width: auto;
@@ -616,13 +580,15 @@ const ghostLinks = {
       text-transform: uppercase;
       letter-spacing: .06em;
     }
-    .hero-mobile-copy span { display: block; margin-top: 5px; font-size: .55em; letter-spacing: .15em; color: var(--amber); }
-    .hero-release {
+    .hero.hero--photo .hero-mobile-copy span { display: block; margin-top: 5px; font-size: .55em; letter-spacing: .15em; color: var(--amber); }
+    .hero.hero--photo .hero-release {
       position: static;
       display: block;
       width: auto;
       margin: 0 auto 24px;
       padding: 0 16px;
+      left: auto;
+      bottom: auto;
       border: 0;
       border-radius: 0;
       background: none;
@@ -630,8 +596,8 @@ const ghostLinks = {
       transform: none;
       text-align: center;
     }
-    .hero-release span { display: none; }
-    .hero-release a {
+    .hero.hero--photo .hero-release span { display: none; }
+    .hero.hero--photo .hero-release a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -642,5 +608,9 @@ const ghostLinks = {
       line-height: 1.2;
       transform: none;
     }
+  }
+  @media (max-width: 950px) and (orientation: landscape) {
+    .hero.hero--photo { height: auto !important; min-height: 0 !important; display: block !important; }
+    .hero.hero--photo .hero-photo { width: 100% !important; height: auto !important; max-height: none !important; object-fit: contain !important; object-position: center center !important; }
   }
 </style>
