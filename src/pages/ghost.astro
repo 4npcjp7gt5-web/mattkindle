@@ -1,4 +1,5 @@
 ---
+import SiteNav from "../components/SiteNav.astro";
 const spotify = "https://open.spotify.com/track/5iBGF0h5J0T3JVB3q5HFHG?si=n4Gt9h-eTtG7rN50brcUkw&utm_source=copy-link";
 const apple = "https://music.apple.com/us/album/ghost-single/6809943132";
 const youtube = "https://youtu.be/BSAe7W8Hyvg?is=Y9HDigE6u3Tsvrj2";
@@ -101,8 +102,8 @@ const amazon = "https://music.amazon.com/albums/B0HJ6S8WZJ?do=play&trackAsin=B0H
       min-height: 100svh;
       margin: 0 auto;
       display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: 24px 0 24px;
+      grid-template-rows: 1fr auto;
+      padding: 100px 0 24px;
     }
 
     nav {
@@ -344,7 +345,7 @@ const amazon = "https://music.amazon.com/albums/B0HJ6S8WZJ?do=play&trackAsin=B0H
     @media (max-width: 800px) {
       .shell {
         width: min(100% - 28px, 590px);
-        padding-top: 18px;
+        padding-top: 90px;
       }
 
       nav { padding-bottom: 14px; }
@@ -398,13 +399,9 @@ const amazon = "https://music.amazon.com/albums/B0HJ6S8WZJ?do=play&trackAsin=B0H
   <div class="vignette" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
   <div class="frame" aria-hidden="true"></div>
+  <SiteNav />
 
   <div class="shell">
-    <nav>
-      <a class="brand" href="/">Matt Kindle</a>
-      <a class="album" href="/">13 Channels · October 23</a>
-    </nav>
-
     <main>
       <div class="art-stage">
         <div class="art-glow" aria-hidden="true"></div>
