@@ -25,8 +25,8 @@ const ghostLinks = {
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 </head>
 <body>
-  <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#album">13 Channels</a><a href="#music">Music</a><a href="/store/">Store</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></div></nav>
-  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-bookmarked-sept2026.webp" alt="Matt Kindle playing acoustic guitar in a cinematic retro studio with vintage televisions and New Music Coming October 23 lettering" fetchpriority="high" /><div class="hero-release"><span>New album · October 23</span><a href="#album">Explore 13 Channels ↓</a></div></header>
+  <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#album">13 Channels</a><a href="#music">Music</a><a href="/store/">Store</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div><details class="portrait-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><div class="portrait-menu__links"><a href="#album">13 Channels</a><a href="#music">Music</a><a href="/store/">Store</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></details></div></nav>
+  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-bookmarked-sept2026.webp" alt="Matt Kindle playing acoustic guitar in a cinematic retro studio with vintage televisions and New Music Coming October 23 lettering" fetchpriority="high" /><p class="hero-mobile-copy">New Music <span>Coming October 23</span></p><div class="hero-release"><span>New album · October 23</span><a href="#album">Explore 13 Channels ↓</a></div></header>
   <main>
     <section id="album" class="section album-release" aria-labelledby="album-title"><div class="album-release__art"><img src="/images/13-channels-card-front.png" alt="13 Channels by Matt Kindle — vintage television album artwork" loading="eager" /></div><div class="album-release__copy"><p class="eyebrow">New album · October 23</p><h2 id="album-title" data-text="13 Channels">13 Channels</h2><p class="album-release__intro">Eighteen songs about memory, family, faith, and the things that stay with us. Start with the new single, <strong>Ghost</strong>.</p><p class="release-label">Ghost · out now</p><div class="release-links" aria-label="Listen to Ghost"><a href={ghostLinks.spotify} target="_blank" rel="noreferrer">Spotify ↗</a><a href={ghostLinks.apple} target="_blank" rel="noreferrer">Apple Music ↗</a><a href={ghostLinks.amazon} target="_blank" rel="noreferrer">Amazon Music ↗</a><a href={ghostLinks.youtube} target="_blank" rel="noreferrer">YouTube ↗</a></div><a class="ghost-page-link" href="/ghost">Open the Ghost listening page →</a></div></section>
     <section id="music" class="section"><p class="eyebrow">Turn the dial</p><h2 data-text="Music">Music</h2><p class="section__intro">New songs, songs of faith, and country stories—each with its own place on the dial.</p><div class="channel-tabs" role="tablist" aria-label="Music channels">{Object.entries(playlists).map(([id,item],index)=><button type="button" role="tab" id={`tab-${id}`} aria-selected={index===0?"true":"false"} aria-controls="player" data-channel={id}>{item.label}</button>)}</div><div id="player" class="player" role="tabpanel" aria-labelledby="tab-new"><iframe src={playlists.new.src} title={playlists.new.title} height="450" loading="lazy" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe></div><div class="listen-links"><a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y" target="_blank" rel="noreferrer">Spotify ↗</a><a href="https://music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q" target="_blank" rel="noreferrer">Apple Music ↗</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube ↗</a></div></section>
@@ -36,6 +36,7 @@ const ghostLinks = {
   </main>
   <footer><a class="footer-logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="footer-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><small>© {new Date().getFullYear()} Matt Kindle</small></footer>
   <script is:inline define:vars={{playlists}}>document.querySelectorAll('[data-channel]').forEach((button)=>{button.addEventListener('click',()=>{const id=button.dataset.channel;const item=playlists[id];document.querySelectorAll('[data-channel]').forEach((tab)=>tab.setAttribute('aria-selected',String(tab===button)));const player=document.querySelector('#player');const frame=player.querySelector('iframe');player.setAttribute('aria-labelledby',`tab-${id}`);frame.src=item.src;frame.title=item.title;});});</script>
+  <script is:inline>document.querySelectorAll('.portrait-menu__links a').forEach((link)=>link.addEventListener('click',()=>link.closest('details')?.removeAttribute('open')));</script>
   <script async charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
 </body>
 </html>
@@ -44,6 +45,8 @@ const ghostLinks = {
 @keyframes walk-up{0%{left:40%;bottom:3%;height:36%;opacity:0}6%{opacity:1}92%{opacity:1}100%{left:56%;bottom:45%;height:11%;opacity:.82}}@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-8%) rotate(1.2deg)}}@keyframes flicker{0%,100%{opacity:.1}47%{opacity:.18}52%{opacity:.05}}
 @media(max-width:700px){.nav__inner{height:58px;padding:0 18px}.wordmark{font-size:.84rem}.nav__links{gap:13px;font-size:.72rem}.nav__links a:nth-child(3){display:none}.hero{padding-top:58px}.scene__room{width:150%;max-width:none;margin-left:-25%}.tv-screen{left:13%;top:39.1%;width:60.9%;height:37%}.hero__title{margin-top:-5vw;padding-bottom:55px}.hero__title p{font-size:.55rem}.hero__title span{font-size:.72rem}.section{padding:72px 20px}.about-section{grid-template-columns:1fr;gap:24px}.player iframe{height:420px}footer{padding:35px 20px;gap:18px;flex-direction:column;text-align:center}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.walker,.walker img,.scanlines,h1::before,h2::before,h1::after,h2::after{animation:none}}
 </style>
+
+
 
 <style is:global>
   .hero--photo { position: relative; }
@@ -529,5 +532,99 @@ const ghostLinks = {
     .nav__links a[href="#shows"],
     .nav__links a[href="#about"] { display: none !important; }
     .nav__links a[href="/store/"] { display: inline !important; }
+  }
+</style>
+
+<style is:global>
+  /* Portrait phones only. Desktop and landscape keep the existing layout. */
+  .portrait-menu, .hero-mobile-copy { display: none; }
+  @media (max-width: 700px) and (orientation: portrait) {
+    html, body { overflow-x: clip; }
+    .nav__inner { height: 58px; padding-inline: 16px; }
+    .nav__links { display: none !important; }
+    .nav-logo { height: 40px; max-width: min(170px, 48vw); }
+    .portrait-menu { display: block; flex: 0 0 auto; }
+    .portrait-menu summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border: 1px solid rgba(242,230,202,.3);
+      border-radius: 7px;
+      color: var(--cream);
+      font: 700 .85rem/1 Inter,system-ui,sans-serif;
+      list-style: none;
+      cursor: pointer;
+    }
+    .portrait-menu summary::-webkit-details-marker { display: none; }
+    .portrait-menu summary:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    .portrait-menu__links {
+      position: absolute;
+      top: 58px;
+      left: 0;
+      right: 0;
+      display: grid;
+      max-height: calc(100svh - 58px);
+      overflow-y: auto;
+      padding: 12px 16px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #1b120d;
+      box-shadow: 0 22px 30px rgba(0,0,0,.45);
+    }
+    .portrait-menu__links a { display: block; padding: 13px 10px; border-bottom: 1px solid rgba(242,230,202,.13); color: var(--cream); }
+    .hero--photo {
+      height: auto !important;
+      min-height: 0 !important;
+      padding-top: 58px !important;
+      display: block !important;
+      overflow: hidden !important;
+    }
+    .hero-photo {
+      display: block;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: clamp(360px, 58svh, 560px) !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      object-fit: cover !important;
+      object-position: 88% 50% !important;
+    }
+    .hero-mobile-copy {
+      display: block;
+      margin: 18px 16px 10px;
+      text-align: center;
+      color: var(--cream);
+      font: 700 clamp(1.75rem, 8vw, 2.4rem)/1.12 Oswald,Impact,sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .hero-mobile-copy span { display: block; margin-top: 5px; font-size: .55em; letter-spacing: .15em; color: var(--amber); }
+    .hero-release {
+      position: static;
+      display: block;
+      width: auto;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      transform: none;
+      text-align: center;
+    }
+    .hero-release span { display: none; }
+    .hero-release a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 22px;
+      border-radius: 5px;
+      font-size: .9rem;
+      line-height: 1.2;
+      transform: none;
+    }
   }
 </style>
