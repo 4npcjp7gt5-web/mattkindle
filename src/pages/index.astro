@@ -502,6 +502,16 @@ const ghostLinks = {
   /* Keep the hero in normal document flow across screen orientations. */
   .portrait-menu { display: none; }
   .hero.hero--photo { height: auto; min-height: 0; display: block; }
+  @media (min-width: 951px) and (min-height: 601px) {
+    .hero.hero--photo {
+      height: 100svh !important;
+      min-height: 100svh !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      overflow: hidden !important;
+    }
+  }
   .hero-mobile-copy {
     position: absolute;
     z-index: 2;
