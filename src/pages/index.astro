@@ -16,7 +16,7 @@ const ghostLinks = {
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="theme-color" content="#1b120d" />
   <meta name="description" content="The official website of East Texas singer-songwriter Matt Kindle. Listen to new, Christian, and country music and find upcoming shows." />
-  <meta property="og:title" content="Matt Kindle — Official Website" /><meta property="og:description" content="Songs about memory, faith, family, and the roads that lead us home." /><meta property="og:type" content="website" /><meta property="og:url" content="https://mattkindle.com/" /><meta property="og:image" content="https://mattkindle.com/images/hero-bookmarked-sept2026.webp" />
+  <meta property="og:title" content="Matt Kindle — Official Website" /><meta property="og:description" content="Songs about memory, faith, family, and the roads that lead us home." /><meta property="og:type" content="website" /><meta property="og:url" content="https://mattkindle.com/" /><meta property="og:image" content="https://mattkindle.com/images/hero-responsive-2026.webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
   <title>Matt Kindle — Official Website</title>
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -26,7 +26,7 @@ const ghostLinks = {
 </head>
 <body>
   <nav class="nav" aria-label="Main navigation"><div class="nav__inner"><a class="wordmark logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="nav-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><div class="nav__links"><a href="#album">13 Channels</a><a href="#music">Music</a><a href="/store/">Store</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div><details class="portrait-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><div class="portrait-menu__links"><a href="#album">13 Channels</a><a href="#music">Music</a><a href="/store/">Store</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#contact">Contact</a></div></details></div></nav>
-  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-bookmarked-sept2026.webp" alt="Matt Kindle playing acoustic guitar in a cinematic retro studio with vintage televisions and New Music Coming October 23 lettering" fetchpriority="high" /><p class="hero-mobile-copy">New Music <span>Coming October 23</span></p><div class="hero-release"><span>New album · October 23</span><a href="#album">Explore 13 Channels ↓</a></div></header>
+  <header id="top" class="hero hero--photo"><img class="hero-photo" src="/images/hero-responsive-2026.webp" alt="Matt Kindle playing acoustic guitar in a warm, vintage television room" fetchpriority="high" /><h1 class="hero-mobile-copy">New Music <span>Coming October 23</span></h1><div class="hero-release"><span>New album · October 23</span><a href="#album">Explore 13 Channels ↓</a></div></header>
   <main>
     <section id="album" class="section album-release" aria-labelledby="album-title"><div class="album-release__art"><img src="/images/13-channels-card-front.png" alt="13 Channels by Matt Kindle — vintage television album artwork" loading="eager" /></div><div class="album-release__copy"><p class="eyebrow">New album · October 23</p><h2 id="album-title" data-text="13 Channels">13 Channels</h2><p class="album-release__intro">Eighteen songs about memory, family, faith, and the things that stay with us. Start with the new single, <strong>Ghost</strong>.</p><p class="release-label">Ghost · out now</p><div class="release-links" aria-label="Listen to Ghost"><a href={ghostLinks.spotify} target="_blank" rel="noreferrer">Spotify ↗</a><a href={ghostLinks.apple} target="_blank" rel="noreferrer">Apple Music ↗</a><a href={ghostLinks.amazon} target="_blank" rel="noreferrer">Amazon Music ↗</a><a href={ghostLinks.youtube} target="_blank" rel="noreferrer">YouTube ↗</a></div><a class="ghost-page-link" href="/ghost">Open the Ghost listening page →</a></div></section>
     <section id="music" class="section"><p class="eyebrow">Turn the dial</p><h2 data-text="Music">Music</h2><p class="section__intro">New songs, songs of faith, and country stories—each with its own place on the dial.</p><div class="channel-tabs" role="tablist" aria-label="Music channels">{Object.entries(playlists).map(([id,item],index)=><button type="button" role="tab" id={`tab-${id}`} aria-selected={index===0?"true":"false"} aria-controls="player" data-channel={id}>{item.label}</button>)}</div><div id="player" class="player" role="tabpanel" aria-labelledby="tab-new"><iframe src={playlists.new.src} title={playlists.new.title} height="450" loading="lazy" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"></iframe></div><div class="listen-links"><a href="https://open.spotify.com/artist/4kPWNGfm8xjSXSsZesTk7y" target="_blank" rel="noreferrer">Spotify ↗</a><a href="https://music.apple.com/us/playlist/matts-songs/pl.u-55D66M3tEpB3q" target="_blank" rel="noreferrer">Apple Music ↗</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube ↗</a></div></section>
@@ -537,7 +537,21 @@ const ghostLinks = {
 
 <style is:global>
   /* Portrait phones only. Desktop and landscape keep the existing layout. */
-  .portrait-menu, .hero-mobile-copy { display: none; }
+  .portrait-menu { display: none; }
+  .hero-mobile-copy {
+    position: absolute;
+    z-index: 2;
+    top: 30%;
+    left: clamp(22px, 5vw, 90px);
+    width: min(39vw, 520px);
+    margin: 0;
+    color: var(--cream);
+    font: 700 clamp(2.5rem, 5.8vw, 6rem)/.98 Oswald,Impact,sans-serif;
+    letter-spacing: .045em;
+    text-transform: uppercase;
+    text-shadow: 0 3px 24px #120c08, 0 2px 8px #120c08;
+  }
+  .hero-mobile-copy span { display: block; margin-top: 12px; color: var(--cream); font-size: .37em; letter-spacing: .13em; }
   @media (max-width: 700px) and (orientation: portrait) {
     html, body { overflow-x: clip; }
     .nav__inner { height: 58px; padding-inline: 16px; }
@@ -589,10 +603,12 @@ const ghostLinks = {
       min-height: 0 !important;
       margin: 0 !important;
       object-fit: cover !important;
-      object-position: 88% 50% !important;
+      object-position: center center !important;
     }
     .hero-mobile-copy {
       display: block;
+      position: static;
+      width: auto;
       margin: 18px 16px 10px;
       text-align: center;
       color: var(--cream);
