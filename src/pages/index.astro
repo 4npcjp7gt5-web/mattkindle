@@ -34,10 +34,26 @@ const ghostLinks = {
     <section id="about" class="section about-section"><div class="about-visual"><p class="eyebrow">Behind the songs</p><h2 data-text="About Matt">About Matt</h2><div class="about-photo-wrap"><img class="about-photo" src="/images/about-matt-performance-sept2026.webp" alt="Matt Kindle singing into a microphone on stage" loading="lazy" /></div></div><div class="about-copy"><p>Matt Kindle is an East Texas singer-songwriter making honest music rooted in melody, memory, faith, and the moments that linger.</p><p>His songs move between indie folk, Christian music, and country—different channels, but the same voice.</p><p>Matt is a loving husband to his beautiful wife, Melanie, and together they have four children. He is also a podiatrist serving the people of East Texas at <a href="https://tylerfoot.com/" target="_blank" rel="noopener noreferrer">Foot Specialists of Tyler</a>.</p></div></section>
     <section id="mailing-list" class="section mailing-list-section" aria-labelledby="mailing-list-title"><p class="eyebrow">Stay on the dial</p><h2 id="mailing-list-title" data-text="Get New Music First">Get New Music First</h2><p class="section__intro">Join the list for new releases, unreleased songs, videos, merch, and occasional show updates.</p><div class="kit-form-wrap"><script is:inline async data-uid="16cc92ffc8" src="https://matt-kindle.kit.com/16cc92ffc8/index.js"></script></div></section>
     <section id="contact" class="section contact-section"><p class="eyebrow">Keep in touch</p><h2 data-text="Contact">Contact</h2><p>For music, shows, and everything in between.</p><div class="contact-links"><a href="mailto:mallets.prompts0z@icloud.com">Email</a><a href="https://www.instagram.com/matt_kindle/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube</a></div></section>
+    <div id="mailing-list-modal" class="mailing-modal" hidden aria-hidden="true"><div class="mailing-modal__backdrop" data-mailing-close></div><div class="mailing-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="mailing-modal-title"><button class="mailing-modal__close" type="button" aria-label="Close email signup" data-mailing-close>×</button><p class="eyebrow">Stay on the dial</p><h2 id="mailing-modal-title" data-text="Get New Music First">Get New Music First</h2><p>New releases, unreleased songs, videos, merch, and occasional show updates.</p><div class="kit-form-wrap kit-form-wrap--modal"><script is:inline async data-uid="16cc92ffc8" src="https://matt-kindle.kit.com/16cc92ffc8/index.js"></script></div></div></div>
   </main>
   <footer><a class="footer-logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="footer-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><small>© {new Date().getFullYear()} Matt Kindle</small></footer>
   <script is:inline define:vars={{playlists}}>document.querySelectorAll('[data-channel]').forEach((button)=>{button.addEventListener('click',()=>{const id=button.dataset.channel;const item=playlists[id];document.querySelectorAll('[data-channel]').forEach((tab)=>tab.setAttribute('aria-selected',String(tab===button)));const player=document.querySelector('#player');const frame=player.querySelector('iframe');player.setAttribute('aria-labelledby',`tab-${id}`);frame.src=item.src;frame.title=item.title;});});</script>
   <script is:inline>document.querySelectorAll('.portrait-menu__links a').forEach((link)=>link.addEventListener('click',()=>link.closest('details')?.removeAttribute('open')));</script>
+  <script is:inline>
+    (() => {
+      const modal = document.getElementById('mailing-list-modal');
+      if (!modal) return;
+      const key = 'mk-mailing-popup-dismissed';
+      const days = 14;
+      const dismissed = Number(localStorage.getItem(key) || 0);
+      if (!dismissed || Date.now() - dismissed > days * 86400000) {
+        window.setTimeout(() => { modal.hidden = false; modal.setAttribute('aria-hidden','false'); document.body.classList.add('mailing-modal-open'); }, 5000);
+      }
+      const close = () => { modal.hidden = true; modal.setAttribute('aria-hidden','true'); document.body.classList.remove('mailing-modal-open'); localStorage.setItem(key, String(Date.now())); };
+      modal.querySelectorAll('[data-mailing-close]').forEach(el => el.addEventListener('click', close));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+    })();
+  </script>
   <script async charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
 </body>
 </html>
@@ -635,4 +651,8 @@ const ghostLinks = {
   .mailing-list-section .section__intro { margin: 20px auto 30px; }
   .kit-form-wrap { max-width: 680px; margin: 0 auto; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: rgba(50,33,23,.5); box-shadow: 0 24px 60px rgba(0,0,0,.22); }
   @media (max-width:700px) { .kit-form-wrap { padding: 16px; } }
+</style>
+
+<style is:global>
+  .mailing-modal[hidden]{display:none!important}.mailing-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px}.mailing-modal__backdrop{position:absolute;inset:0;background:rgba(8,5,3,.78);backdrop-filter:blur(6px)}.mailing-modal__dialog{position:relative;z-index:1;width:min(620px,94vw);max-height:90svh;overflow:auto;padding:38px 30px 28px;border:1px solid rgba(217,155,74,.45);border-radius:18px;background:#21150f;box-shadow:0 30px 90px rgba(0,0,0,.65);text-align:center}.mailing-modal__dialog h2{font-size:clamp(2.3rem,7vw,4.4rem)!important}.mailing-modal__dialog>p:not(.eyebrow){max-width:500px;margin:18px auto 24px;color:var(--muted)}.mailing-modal__close{position:absolute;top:10px;right:14px;border:0;background:transparent;color:var(--cream);font:300 2rem/1 Inter,sans-serif;cursor:pointer}.kit-form-wrap--modal{padding:12px;border:0;background:transparent;box-shadow:none}.mailing-modal-open{overflow:hidden}@media(max-width:700px){.mailing-modal__dialog{padding:34px 16px 20px}.mailing-modal__dialog h2{font-size:clamp(2rem,11vw,3.3rem)!important}}
 </style>
