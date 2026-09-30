@@ -47,7 +47,7 @@ const ghostLinks = {
       const days = 14;
       const dismissed = Number(localStorage.getItem(key) || 0);
       if (!dismissed || Date.now() - dismissed > days * 86400000) {
-        window.setTimeout(() => { modal.hidden = false; modal.setAttribute('aria-hidden','false'); document.body.classList.add('mailing-modal-open'); }, 5000);
+        window.setTimeout(() => { modal.hidden = false; modal.setAttribute('aria-hidden','false'); document.body.classList.add('mailing-modal-open'); }, 3000);
       }
       const close = () => { modal.hidden = true; modal.setAttribute('aria-hidden','true'); document.body.classList.remove('mailing-modal-open'); localStorage.setItem(key, String(Date.now())); };
       modal.querySelectorAll('[data-mailing-close]').forEach(el => el.addEventListener('click', close));
