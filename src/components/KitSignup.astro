@@ -11,16 +11,30 @@ if (!/^\d+$/.test(formId)) {
   throw new Error("KitSignup requires the numeric Kit form ID from Embed → HTML.");
 }
 const emailId = `email-signup-${variant}`;
+// Matches the confirmation message in Kit's HTML embed for this form.
+const kitOptions = {
+  settings: {
+    after_subscribe: {
+      action: "message",
+      success_message: "Success! Now check your email to confirm your subscription.",
+      redirect_url: "",
+    },
+    powered_by: { show: true, url: "https://kit.com/features/forms?utm_campaign=poweredby&utm_content=form&utm_medium=referral&utm_source=dynamic" },
+    recaptcha: { enabled: false },
+  },
+  version: "5",
+};
 ---
 
 <form
-  class:list={["mk-signup", `mk-signup--${variant}`]}
+  class:list={["seva-form", "formkit-form", "mk-signup", `mk-signup--${variant}`]}
   action={`https://app.kit.com/forms/${formId}/subscriptions`}
   method="post"
   data-sv-form={formId}
   data-uid={uid}
   data-format="inline"
   data-version="5"
+  data-options={JSON.stringify(kitOptions)}
 >
   {variant === "inline" && (
     <div class="mk-signup__photo" aria-hidden="true">
@@ -33,10 +47,12 @@ const emailId = `email-signup-${variant}`;
     </div>
   )}
   <div class="mk-signup__fields">
+    <ul class="mk-signup__alerts formkit-alert formkit-alert-error" data-element="errors" data-group="alert" role="alert"></ul>
     <label for={emailId}>Email address</label>
     <div class="mk-signup__entry">
       <input
         id={emailId}
+        class="formkit-input"
         name="email_address"
         type="email"
         autocomplete="email"
@@ -44,7 +60,7 @@ const emailId = `email-signup-${variant}`;
         required
         maxlength="254"
       />
-      <button type="submit">Join</button>
+      <button data-element="submit" type="submit">Join</button>
     </div>
     <p class="mk-signup__note">
       Occasional music, video and show updates. Unsubscribe anytime.
@@ -104,6 +120,8 @@ const emailId = `email-signup-${variant}`;
     text-shadow: 0 2px 10px #120c08;
   }
   .mk-signup__fields { display: grid; gap: 12px; width: 100%; min-width: 0; }
+  .mk-signup__alerts { list-style: none; margin: 0; padding: 10px; border-radius: 8px; color: #f8c9bd; background: #542c24; text-align: left; }
+  .mk-signup__alerts:empty { display: none; }
   label { text-align: left; color: #d4bf9e; font-size: .9rem; font-weight: 600; }
   .mk-signup__entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
   input {
