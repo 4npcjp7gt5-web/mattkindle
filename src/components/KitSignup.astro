@@ -5,8 +5,10 @@ interface Props {
   /** Existing Kit embed UID, kept on the form for native Kit attribution. */
   uid: string;
   variant?: "inline" | "modal";
+  /** Optional button copy for campaign-specific uses such as album reservations. */
+  buttonLabel?: string;
 }
-const { formId, uid, variant = "inline" } = Astro.props;
+const { formId, uid, variant = "inline", buttonLabel } = Astro.props;
 if (!/^\d+$/.test(formId)) {
   throw new Error("KitSignup requires the numeric Kit form ID from Embed → HTML.");
 }
@@ -62,7 +64,7 @@ const kitOptions = {
           maxlength="254"
         />
       </div>
-      <button class="formkit-submit" data-element="submit" type="submit">{variant === "modal" ? "Join the List" : "Join"}</button>
+      <button class="formkit-submit" data-element="submit" type="submit">{buttonLabel ?? (variant === "modal" ? "Join the List" : "Join")}</button>
     </div>
     <p class="mk-signup__note">
       Occasional music, video and show updates. Unsubscribe anytime.
