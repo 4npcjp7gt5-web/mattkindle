@@ -1,0 +1,117 @@
+---
+import SiteNav from "../components/SiteNav.astro";
+import KitSignup from "../components/KitSignup.astro";
+
+const RESERVE_FORM_ID = "9980936";
+const RESERVE_FORM_UID = "6b5509a766";
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#1b120d" />
+  <meta name="description" content="Reserve 13 Channels by Matt Kindle and get the album links in your inbox when it releases October 23." />
+  <meta property="og:title" content="Reserve 13 Channels | Matt Kindle" />
+  <meta property="og:description" content="Be one of the first to hear 13 Channels when it releases October 23." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mattkindle.com/reserve/" />
+  <meta property="og:image" content="https://mattkindle.com/images/13-channels-card-front.png" />
+  <title>Reserve 13 Channels | Matt Kindle</title>
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <SiteNav current="reserve" />
+  <main>
+    <section class="reserve-hero">
+      <div class="cover-wrap">
+        <img src="/images/13-channels-card-front.png" alt="13 Channels by Matt Kindle album artwork" />
+      </div>
+      <div class="reserve-copy">
+        <p class="eyebrow">New album · October 23</p>
+        <h1>Reserve<br /><span>13 Channels</span></h1>
+        <p class="lead">Be one of the first to hear the album. Reserve it with your email and I’ll send you the listening links as soon as <strong>13 Channels</strong> goes live.</p>
+
+        <div class="reserve-card" aria-labelledby="reserve-form-title">
+          <p class="mini-label">Free album reservation</p>
+          <h2 id="reserve-form-title">Save my spot</h2>
+          <p>No charge and no checkout. This is my homemade version of a pre-save: confirm your email, and the album will come straight to your inbox on release day.</p>
+          <KitSignup formId={RESERVE_FORM_ID} uid={RESERVE_FORM_UID} variant="modal" buttonLabel="Reserve My Copy" />
+        </div>
+
+        <p class="fine-print">By reserving, you’re joining Matt Kindle’s email list for new music and occasional updates. Unsubscribe anytime.</p>
+      </div>
+    </section>
+
+    <section class="how-it-works" aria-labelledby="how-title">
+      <p class="eyebrow">What happens next</p>
+      <h2 id="how-title">Three easy steps</h2>
+      <div class="steps">
+        <article><span>1</span><h3>Reserve</h3><p>Enter your email above.</p></article>
+        <article><span>2</span><h3>Confirm</h3><p>Open the confirmation email from Matt Kindle.</p></article>
+        <article><span>3</span><h3>Listen</h3><p>On October 23, get the album links in your inbox.</p></article>
+      </div>
+      <a class="back-link" href="/">← Back to mattkindle.com</a>
+    </section>
+  </main>
+  <footer>
+    <img src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" />
+    <span>© {new Date().getFullYear()} Matt Kindle</span>
+  </footer>
+  <script is:inline defer src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+</body>
+</html>
+
+<style is:global>
+  :root{--bg:#1b120d;--panel:#2a1b13;--cream:#f2e6ca;--muted:#bda98c;--amber:#d99b4a;--line:#624630}
+  *{box-sizing:border-box}
+  html{background:var(--bg)}
+  body{margin:0;color:var(--cream);background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 110px),
+    linear-gradient(180deg,#100a07 0,#1b120d 48rem);
+    font:16px/1.65 Inter,system-ui,sans-serif}
+  a{color:inherit;text-decoration:none}
+  main{padding-top:66px}
+  .reserve-hero{width:min(1120px,100%);margin:auto;padding:72px 28px 82px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(380px,1.1fr);gap:clamp(42px,7vw,88px);align-items:center}
+  .cover-wrap{overflow:hidden;border:1px solid rgba(217,155,74,.35);border-radius:20px;background:#0d0806;box-shadow:0 34px 90px rgba(0,0,0,.48);transform:rotate(-1deg)}
+  .cover-wrap img{display:block;width:100%;height:auto}
+  .eyebrow,.mini-label,h1,h2,h3{font-family:Oswald,Impact,sans-serif;text-transform:uppercase}
+  .eyebrow,.mini-label{margin:0 0 12px;color:var(--amber);font-size:.78rem;font-weight:700;letter-spacing:.2em}
+  h1{margin:0;font-size:clamp(4rem,8vw,7.6rem);line-height:.84;letter-spacing:.035em}
+  h1 span{color:var(--amber)}
+  .lead{max-width:650px;margin:26px 0 32px;color:#d3c1a5;font-size:clamp(1.05rem,1.7vw,1.25rem)}
+  .lead strong{color:var(--cream)}
+  .reserve-card{padding:28px;border:1px solid rgba(217,155,74,.42);border-radius:18px;background:rgba(42,27,19,.9);box-shadow:0 22px 60px rgba(0,0,0,.28)}
+  .reserve-card h2{margin:0;font-size:clamp(2rem,4vw,3.2rem);line-height:1}
+  .reserve-card>p:not(.mini-label){margin:14px 0 22px;color:var(--muted)}
+  .reserve-card .mk-signup__note,.reserve-card .mk-signup__kit-credit{display:none}
+  .fine-print{margin:13px 4px 0;color:#9f8c77;font-size:.76rem;line-height:1.5}
+  .how-it-works{width:min(1050px,100%);margin:auto;padding:78px 28px 92px;border-top:1px solid rgba(98,70,48,.5);text-align:center}
+  .how-it-works h2{margin:0;font-size:clamp(2.7rem,6vw,4.8rem);line-height:1}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:38px 0 34px;text-align:left}
+  .steps article{padding:24px;border:1px solid var(--line);border-radius:14px;background:rgba(42,27,19,.6)}
+  .steps span{display:grid;place-items:center;width:34px;height:34px;margin-bottom:18px;border-radius:50%;background:var(--amber);color:#1b120d;font-weight:800}
+  .steps h3{margin:0 0 8px;font-size:1.35rem;letter-spacing:.05em}
+  .steps p{margin:0;color:var(--muted)}
+  .back-link{display:inline-block;color:var(--amber);font-weight:700}
+  footer{width:min(1050px,100%);margin:auto;padding:32px 28px 46px;border-top:1px solid rgba(98,70,48,.45);display:flex;align-items:center;justify-content:space-between;gap:24px;color:var(--muted)}
+  footer img{width:auto;height:54px;max-width:240px;object-fit:contain}
+  @media(max-width:780px){
+    main{padding-top:58px}
+    .reserve-hero{grid-template-columns:1fr;padding:36px 18px 58px;gap:34px}
+    .cover-wrap{width:min(92vw,560px);margin:auto;transform:none}
+    .reserve-copy{text-align:center}
+    .lead{margin-inline:auto}
+    .reserve-card{text-align:left;padding:22px 16px}
+    .reserve-card .mini-label,.reserve-card h2,.reserve-card>p{text-align:center}
+    .steps{grid-template-columns:1fr}
+    .how-it-works{padding:60px 18px 70px}
+    footer{padding:28px 18px 38px;flex-direction:column;text-align:center}
+  }
+</style>
