@@ -2,6 +2,7 @@
 const { current = "" } = Astro.props;
 const links = [
   { href: "/#album", label: "13 Channels" },
+  { href: "/reserve/", label: "Reserve" },
   { href: "/#music", label: "Music" },
   { href: "/store/", label: "Store" },
   { href: "/#shows", label: "Shows" },
@@ -14,12 +15,12 @@ const links = [
   <div class="site-nav__inner">
     <a class="site-nav__brand" href="/" aria-label="Matt Kindle — home"><img src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a>
     <div class="site-nav__links">
-      {links.map(({ href, label }) => <a href={href} aria-current={current === "store" && label === "Store" ? "page" : undefined}>{label}</a>)}
+      {links.map(({ href, label }) => <a href={href} aria-current={(current === "store" && label === "Store") || (current === "reserve" && label === "Reserve") ? "page" : undefined}>{label}</a>)}
     </div>
     <details class="site-nav__menu">
       <summary>Menu <span aria-hidden="true">☰</span></summary>
       <div class="site-nav__menu-links">
-        {links.map(({ href, label }) => <a href={href} aria-current={current === "store" && label === "Store" ? "page" : undefined}>{label}</a>)}
+        {links.map(({ href, label }) => <a href={href} aria-current={(current === "store" && label === "Store") || (current === "reserve" && label === "Reserve") ? "page" : undefined}>{label}</a>)}
       </div>
     </details>
   </div>
