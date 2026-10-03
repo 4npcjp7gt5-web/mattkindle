@@ -41,28 +41,128 @@ const ghostLinks = {
     <section id="contact" class="section contact-section"><p class="eyebrow">Keep in touch</p><h2 data-text="Contact">Contact</h2><p>For music, shows, and everything in between.</p><div class="contact-links"><a href="mailto:matt@mattkindle.com">Email</a><a href="https://www.instagram.com/matt_kindle/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.youtube.com/@mattkindlemusic" target="_blank" rel="noreferrer">YouTube</a></div></section>
     <div id="mailing-list-modal" class="mailing-modal" hidden aria-hidden="true"><div class="mailing-modal__backdrop" data-mailing-close></div><div class="mailing-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="mailing-modal-title"><button class="mailing-modal__close" type="button" aria-label="Close email signup" data-mailing-close>×</button><p class="eyebrow">Stay on the dial</p><h2 id="mailing-modal-title" data-text="Get New Music First">Get New Music First</h2><p>New releases, unreleased songs, videos, merch, and occasional show updates.</p><div class="kit-form-wrap kit-form-wrap--modal">{KIT_MODAL_FORM_ID ? <KitSignup formId={KIT_MODAL_FORM_ID} uid="6b5509a766" variant="modal" /> : <script is:inline async data-uid="6b5509a766" src="https://matt-kindle.kit.com/6b5509a766/index.js"></script>}</div></div></div>
   </main>
+  <div id="mailing-reminder" class="mailing-reminder" hidden>
+    <button class="mailing-reminder__open" type="button" aria-haspopup="dialog" aria-controls="mailing-list-modal">Get New Music First</button>
+    <button class="mailing-reminder__close" type="button" aria-label="Dismiss signup reminder">×</button>
+  </div>
   <footer><a class="footer-logo-link" href="#top" aria-label="Matt Kindle — back to top"><img class="footer-logo" src="/images/matt-kindle-logo-warm-v2.png" alt="Matt Kindle" /></a><small>© {new Date().getFullYear()} Matt Kindle</small></footer>
   <script is:inline define:vars={{playlists}}>document.querySelectorAll('[data-channel]').forEach((button)=>{button.addEventListener('click',()=>{const id=button.dataset.channel;const item=playlists[id];document.querySelectorAll('[data-channel]').forEach((tab)=>tab.setAttribute('aria-selected',String(tab===button)));const player=document.querySelector('#player');const frame=player.querySelector('iframe');player.setAttribute('aria-labelledby',`tab-${id}`);frame.src=item.src;frame.title=item.title;});});</script>
   <script is:inline>document.querySelectorAll('.portrait-menu__links a').forEach((link)=>link.addEventListener('click',()=>link.closest('details')?.removeAttribute('open')));</script>
   <script is:inline>
     (() => {
       const modal = document.getElementById('mailing-list-modal');
-      if (!modal) return;
+      const reminder = document.getElementById('mailing-reminder');
+      if (!modal || !reminder) return;
       const key = 'mk-mailing-popup-dismissed';
+      const subscribedKey = 'mk-mailing-subscribed';
+      const reminderKey = 'mk-mailing-reminder-dismissed';
       const days = 14;
-      const dismissed = Number(localStorage.getItem(key) || 0);
-      if (!dismissed || Date.now() - dismissed > days * 86400000) {
-        window.setTimeout(() => { modal.hidden = false; modal.setAttribute('aria-hidden','false'); document.body.classList.add('mailing-modal-open'); }, 3000);
+      // Signup still works when browser privacy settings block storage.
+      const read = (storage, name) => { try { return window[storage].getItem(name); } catch { return null; } };
+      const save = (storage, name, value) => { try { window[storage].setItem(name, value); } catch {} };
+      const dismissed = Number(read('localStorage', key) || 0);
+      let subscribed = read('localStorage', subscribedKey) === 'true';
+      let reminderDismissed = read('sessionStorage', reminderKey) === 'true';
+      let previousFocus = null;
+      let popupTimer;
+      const showReminder = () => { reminder.hidden = subscribed || reminderDismissed || !modal.hidden; };
+      const open = () => {
+        if (subscribed || !modal.hidden) return;
+        window.clearTimeout(popupTimer);
+        previousFocus = document.activeElement;
+        reminder.hidden = true;
+        modal.hidden = false;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('mailing-modal-open');
+        modal.querySelector('[data-mailing-close].mailing-modal__close')?.focus({ preventScroll: true });
+      };
+      const close = () => {
+        modal.hidden = true;
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('mailing-modal-open');
+        save('localStorage', key, String(Date.now()));
+        showReminder();
+        if (previousFocus instanceof HTMLElement && previousFocus !== document.body && !previousFocus.closest('[hidden]')) {
+          previousFocus.focus({ preventScroll: true });
+        } else if (!reminder.hidden) {
+          reminder.querySelector('.mailing-reminder__open')?.focus({ preventScroll: true });
+        }
+      };
+      if (!subscribed) {
+        if (!dismissed || Date.now() - dismissed > days * 86400000) {
+          popupTimer = window.setTimeout(open, 3000);
+        } else {
+          showReminder();
+        }
       }
-      const close = () => { modal.hidden = true; modal.setAttribute('aria-hidden','true'); document.body.classList.remove('mailing-modal-open'); localStorage.setItem(key, String(Date.now())); };
+      reminder.querySelector('.mailing-reminder__open').addEventListener('click', open);
+      reminder.querySelector('.mailing-reminder__close').addEventListener('click', () => {
+        reminderDismissed = true;
+        reminder.hidden = true;
+        save('sessionStorage', reminderKey, 'true');
+      });
       modal.querySelectorAll('[data-mailing-close]').forEach(el => el.addEventListener('click', close));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+      document.addEventListener('keydown', e => {
+        if (modal.hidden) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); }
+        if (e.key === 'Tab') {
+          const controls = [...modal.querySelectorAll('button, input, a[href]')].filter(el => !el.disabled && el.getClientRects().length);
+          const first = controls[0], last = controls[controls.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+        }
+      });
+      // Kit adds this success element only after a successful response.
+      // A failed request or merely submitting the form must not hide the reminder.
+      const onSignupSuccess = () => {
+        if (!document.querySelector('.kit-form-wrap [data-element="success"]')) return;
+        subscribed = true;
+        save('localStorage', subscribedKey, 'true');
+        window.clearTimeout(popupTimer);
+        reminder.hidden = true;
+        observer.disconnect();
+      };
+      const observer = new MutationObserver(onSignupSuccess);
+      document.querySelectorAll('.kit-form-wrap').forEach(form => observer.observe(form, { childList: true, subtree: true }));
+      onSignupSuccess();
     })();
   </script>
   <script is:inline defer src="https://f.convertkit.com/ckjs/ck.5.js"></script>
   <script async charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
 </body>
 </html>
+<style is:global>
+  .mailing-reminder[hidden] { display: none !important; }
+  .mailing-reminder {
+    position: fixed;
+    z-index: 90;
+    left: max(16px, env(safe-area-inset-left));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    display: flex;
+    align-items: stretch;
+    max-width: calc(100vw - 32px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    border: 1px solid rgba(242,230,202,.25);
+    border-radius: 10px;
+    background: var(--amber);
+    box-shadow: 0 8px 28px rgba(0,0,0,.4);
+    overflow: hidden;
+  }
+  .mailing-reminder button {
+    min-height: 48px;
+    border: 0;
+    background: transparent;
+    color: var(--walnut);
+    font: 700 .9375rem/1.3 Inter,system-ui,sans-serif;
+    cursor: pointer;
+  }
+  .mailing-reminder__open { min-width: 0; padding: 12px 16px; text-align: left; }
+  .mailing-reminder .mailing-reminder__close { flex: 0 0 44px; border-left: 1px solid rgba(27,18,13,.2); font-size: 1.5rem; }
+  .mailing-reminder button:hover { background: rgba(255,255,255,.15); }
+  .mailing-reminder button:focus-visible { outline: 2px solid var(--walnut); outline-offset: -4px; }
+  @media (max-width: 430px) {
+    .mailing-reminder__open { padding-inline: 12px; }
+  }
+</style>
 <style is:global>
 :root{--walnut:#1b120d;--card:#322117;--cream:#f2e6ca;--muted:#bda98c;--amber:#d99b4a;--line:#624630}*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--walnut)}body{margin:0;color:var(--cream);background:var(--walnut);font-family:Inter,system-ui,sans-serif;line-height:1.65;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 110px),linear-gradient(180deg,#120c08,var(--walnut) 45rem)}a{color:inherit;text-decoration:none}.nav{position:fixed;z-index:50;top:0;left:0;width:100%;border-bottom:1px solid rgba(217,155,74,.2);background:rgba(20,13,9,.8);backdrop-filter:blur(14px)}.nav__inner{max-width:1100px;height:66px;margin:auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between}.wordmark{font-family:"Playfair Display",serif;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--amber)}.nav__links{display:flex;gap:28px;font-size:.86rem;color:var(--muted)}.nav a:hover,.nav a:focus-visible{color:var(--cream)}.hero{padding-top:66px;overflow:hidden}.scene{position:relative;width:100%;line-height:0}.scene__room{display:block;width:100%;height:auto}.tv-screen{position:absolute;left:25.3%;top:39.1%;width:40.6%;height:37%;overflow:hidden}.walker{position:absolute;left:40%;bottom:3%;height:36%;transform:translateX(-50%);animation:walk-up 22s cubic-bezier(.4,0,.6,1) infinite}.walker img{height:100%;width:auto;filter:saturate(.83) contrast(.94) brightness(.94);animation:bob .9s ease-in-out infinite}.scanlines{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(0,0,0,.28) 0 1px,transparent 1px 4px);animation:flicker 4s ease-in-out infinite}.vignette{position:absolute;inset:0;box-shadow:inset 0 0 190px rgba(10,6,3,.86);background:linear-gradient(0deg,var(--walnut),transparent 32%)}.hero__title{position:relative;z-index:2;margin-top:-8vw;padding:0 24px 68px;text-align:center}.hero__title p,.eyebrow{margin:0 0 10px;font-family:Audiowide,sans-serif;font-size:.66rem;letter-spacing:.48em;text-transform:uppercase;color:var(--amber)}.hero__title h1{margin:0;font-family:"Great Vibes",cursive;font-weight:400;font-size:clamp(4.4rem,10vw,9rem);line-height:1;color:#f7ecd6;text-shadow:0 8px 30px #080503}.hero__title span{display:block;margin-top:12px;font-family:"Playfair Display",serif;letter-spacing:.5em;text-transform:uppercase;color:#cdb487}.section{max-width:1050px;margin:auto;padding:96px 28px;scroll-margin-top:60px;border-top:1px solid rgba(98,70,48,.45)}h2{margin:0;font:600 clamp(2.7rem,6vw,4.5rem)/1 "Playfair Display",serif;color:var(--cream)}.section__intro{max-width:600px;margin:18px 0 32px;color:var(--muted);font-size:1.05rem}.channel-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:34px 0 20px}.channel-tabs button{border:1px solid var(--line);border-radius:999px;padding:11px 20px;background:transparent;color:var(--muted);font:600 .85rem Inter;cursor:pointer}.channel-tabs button[aria-selected="true"]{border-color:var(--amber);background:var(--amber);color:#1a100a;box-shadow:0 0 30px rgba(217,155,74,.2)}.player{padding:10px;border:1px solid var(--line);border-radius:18px;background:#130d09;box-shadow:0 24px 60px rgba(0,0,0,.28)}.player iframe{display:block;width:100%;border:0;border-radius:10px}.listen-links,.contact-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:22px;color:var(--amber);font-weight:600}.shows-card{margin-top:35px;padding:28px;border:1px solid var(--line);border-radius:18px;background:rgba(50,33,23,.5)}.about-section{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}.about-copy{color:var(--muted);font-family:"Playfair Display",serif;font-size:1.25rem}.about-copy p:first-child{margin-top:0}.contact-section{text-align:center}.contact-section .eyebrow{margin-left:.48em}.contact-section>p:not(.eyebrow){color:var(--muted)}.contact-links{justify-content:center}footer{max-width:1050px;margin:auto;padding:42px 28px 52px;border-top:1px solid rgba(98,70,48,.45);display:flex;justify-content:space-between;color:var(--muted)}footer span{font-family:"Playfair Display",serif;color:var(--amber)}
 @keyframes walk-up{0%{left:40%;bottom:3%;height:36%;opacity:0}6%{opacity:1}92%{opacity:1}100%{left:56%;bottom:45%;height:11%;opacity:.82}}@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-8%) rotate(1.2deg)}}@keyframes flicker{0%,100%{opacity:.1}47%{opacity:.18}52%{opacity:.05}}
