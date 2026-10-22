@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="900" viewBox="0 0 540 900">
+<defs>
+<linearGradient id="grain" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#190e09"/><stop offset=".055" stop-color="#3c2518"/><stop offset=".16" stop-color="#67442a"/><stop offset=".36" stop-color="#50321f"/><stop offset=".52" stop-color="#71482a"/><stop offset=".75" stop-color="#41291b"/><stop offset=".96" stop-color="#5c3923"/><stop offset="1" stop-color="#1c110b"/></linearGradient>
+<linearGradient id="slat" x1="0" x2="1"><stop stop-color="#1b100a"/><stop offset=".035" stop-color="#92603b"/><stop offset=".075" stop-color="#6f482c"/><stop offset=".5" stop-color="#51321f"/><stop offset=".88" stop-color="#694228"/><stop offset=".97" stop-color="#26170d"/><stop offset="1" stop-color="#130c08"/></linearGradient>
+<filter id="woodnoise" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".037 .18" numOctaves="3" seed="8" stitchTiles="stitch"/></filter>
+<filter id="soft"><feGaussianBlur stdDeviation=".7"/></filter>
+<pattern id="hair" width="9" height="170" patternUnits="userSpaceOnUse"><path d="M2 -10 Q7 45 1 90 T3 180" fill="none" stroke="#120c08" stroke-width=".65" opacity=".3"/><path d="M6 0 Q3 40 8 80 T5 170" fill="none" stroke="#a57a4e" stroke-width=".5" opacity=".23"/></pattern>
+</defs>
+<rect width="540" height="900" fill="#3b2518"/>
+<g>
+<rect x="0" y="0" width="135" height="900" fill="url(#grain)"/>
+<rect x="135" y="0" width="135" height="900" fill="#533523"/>
+<rect x="270" y="0" width="135" height="900" fill="#42291a"/>
+<rect x="405" y="0" width="135" height="900" fill="#5a3824"/>
+</g>
+<g opacity=".4"><rect width="540" height="900" filter="url(#woodnoise)" style="mix-blend-mode:soft-light"/></g>
+<g fill="none" opacity=".5">
+<path d="M15 0 C7 160 30 265 17 450 S3 740 20 900 M34 0 C46 122 14 278 32 426 S44 742 27 900 M47 0 Q61 192 48 450 T46 900 M58 0 Q40 193 59 430 T62 900 M83 0 Q66 260 88 490 T81 900 M111 0 Q91 238 110 460 T113 900
+M146 0 Q163 206 145 432 T151 900 M178 0 Q156 230 177 440 T174 900 M193 0 Q210 225 188 500 T200 900 M224 0 Q208 190 233 395 T227 900 M249 0 Q230 186 248 465 T246 900
+M286 0 Q298 235 288 460 T289 900 M316 0 Q289 185 313 424 T315 900 M351 0 Q365 262 345 486 T352 900 M383 0 Q367 190 378 460 T381 900
+M427 0 Q443 210 427 418 T433 900 M456 0 Q434 186 456 456 T458 900 M483 0 Q506 200 485 448 T492 900 M520 0 Q497 205 521 470 T521 900" stroke="#120a06" stroke-width="1.7"/>
+<path d="M21 0 Q32 255 17 500 T30 900 M72 0 Q83 225 70 455 T72 900 M127 0 Q109 235 126 450 T125 900 M165 0 Q188 220 167 440 T174 900 M234 0 Q250 200 230 470 T234 900 M303 0 Q317 245 298 470 T303 900 M371 0 Q387 235 366 445 T375 900 M439 0 Q424 210 442 425 T445 900 M499 0 Q514 235 493 450 T508 900" stroke="#d1a074" stroke-width="1.2" opacity=".43"/>
+</g>
+<g opacity=".32"><ellipse cx="92" cy="270" rx="9" ry="47" fill="none" stroke="#1e120c" stroke-width="3"/><ellipse cx="92" cy="270" rx="5" ry="28" fill="none" stroke="#b1814c" stroke-width="1"/><ellipse cx="356" cy="620" rx="10" ry="58" fill="none" stroke="#1e120c" stroke-width="4"/><ellipse cx="356" cy="620" rx="5" ry="35" fill="none" stroke="#b1814c" stroke-width="1"/></g>
+<rect width="540" height="900" fill="url(#hair)" opacity=".42"/>
+<g opacity=".96">
+<rect x="130" width="7" height="900" fill="#130c08"/><rect x="136" width="3" height="900" fill="#a4784c" opacity=".5"/>
+<rect x="265" width="7" height="900" fill="#130c08"/><rect x="271" width="3" height="900" fill="#a4784c" opacity=".48"/>
+<rect x="400" width="7" height="900" fill="#130c08"/><rect x="406" width="3" height="900" fill="#a4784c" opacity=".5"/>
+<rect x="535" width="5" height="900" fill="#130c08"/>
+</g>
+</svg>
